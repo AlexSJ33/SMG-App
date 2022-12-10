@@ -1,0 +1,162 @@
+GerenciadorTelas:
+    Login:
+    Account:
+
+<Login>:
+    name:'login'
+    FloatLayout:
+        
+        MDIconButton:
+            pos_hint: {'center_x': .5, 'center_y': .8}
+            icon: 'account-circle'
+            icon_size: '96sp'
+            
+        MDTextField:
+            id: username
+            hint_text: 'Username'
+            pos_hint: {'center_x': .5, 'center_y': .6}
+            size_hint_x: .80
+            
+        MDTextField:
+            id: password
+            hint_text: 'Password'
+            password: True
+            icon_right: 'eye-off'
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint_x: .80
+        MDRoundFlatButton:
+            text: 'Sign In'
+            radius: 24, 24, 24, 24
+            size_hint_y: .10
+            size_hint_x: .7
+            pos_hint: {'center_x': .5,'center_y': .3}
+            halign: 'center'
+        MDLabel:
+            text: 'Login Incorret'
+            theme_text_color: 'Custom'
+            text_color: 'red'
+            font_size: '14px'
+            halign: 'center'
+            pos_hint: {'center_x': .5, 'center_y': .42}
+        MDLabel:
+            text: 'Don´t have an account?'
+            font_size: '14px'
+            halign: 'center'
+            pos_hint: {'center_x': .4, 'center_y': .18}
+        MDTextButton:
+            text: 'Register Here!'
+            theme_text_color: 'Custom'
+            text_color: 'purple'
+            font_size: '12px'
+            focus_color: 1, 0, 1, 1
+            pos_hint: {'center_x': .8, 'center_y': .18}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'account'
+
+<Account>:
+    name:'account'
+    canvas.before:
+        Color:
+            rgba: (0,1,0,0)
+
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    FloatLayout:
+
+        MDIconButton:
+            pos_hint: {'center_x': .5, 'center_y': .9}
+            icon: 'account-edit'
+            icon_size: '96sp'
+        MDLabel:
+            text: 'Create Your Account'
+            theme_text_color: 'Custom'
+            text_color: 'yellow'                
+            font_size: '18px'
+            halign: 'center'
+            pos_hint: {'center_x': .5, 'center_y': .8}
+        MDTextField:
+            id: username
+            hint_text: 'Username'
+            icon_left: 'account'
+            pos_hint: {'center_x': .5, 'center_y': .7}
+            size_hint_x: .80
+            multiline: False
+            required: True
+              
+        MDTextField:
+            id: email
+            hint_text: 'E-Mail'
+            icon_left: 'email'
+            pos_hint: {'center_x': .5, 'center_y': .6}
+            size_hint_x: .80
+        MDTextField:
+            id: password
+            hint_text: 'Password'
+            password: True
+            icon_left: 'key-variant'
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint_x: .80
+        MDTextField:
+            id: password_2
+            hint_text: 'Repeat Password'
+            password: True
+            icon_left: 'key-variant'
+            pos_hint: {'center_x': .5, 'center_y': .4}
+            size_hint_x: .80
+        MDRoundFlatButton:
+            text: 'Sign UP'
+            radius: 24, 24, 24, 24
+            size_hint_y: .10
+            size_hint_x: .7
+            pos_hint: {'center_x': .5,'center_y': .2}
+            halign: 'center'
+            on_release: root.pega_valor()
+
+        MDTextButton:
+            text: 'Listar Usuarios!'
+            theme_text_color: 'Custom'
+            text_color: 'green'
+            font_size: '12px'
+            focus_color: 1, 0, 1, 1
+            pos_hint: {'center_x': .5, 'center_y': .1}
+            on_release:
+                root.abrir_card()
+
+                
+<ListUser>:
+    id: card
+    orientation: "vertical"
+    padding: "8dp"
+    size_hint: .7, .7
+    size: "280dp", "180dp"
+    pos_hint: {"center_x": .5, "center_y": .5}
+
+    MDTextButton:
+        text: "Usuários"
+        theme_text_color: "Secondary"
+        pos_hint: {'center_x': .5, 'center_y': .1}
+        size_hint_y: None
+        height: self.texture_size[1]
+        on_release: root.exibir_dados()
+    
+
+    MDSeparator:
+        height: "1dp"
+
+    ScrollView:
+        scroll_type: ['bars', 'content']
+        bar_width: 10
+
+        MDList:
+            id: box
+            spacing: "8dp"
+
+    MDIconButton:
+        icon: "close-circle-outline"
+        pos_hint: {"center_x": .5, "center_y": .5}    
+        icon_size: "32sp"
+        theme_icon_color: "Custom"
+        icon_color: "orange"
+        on_release: root.fechar()
