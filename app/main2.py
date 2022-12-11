@@ -60,11 +60,11 @@ class Account(Screen,ConectaBanco,MDApp):
             self.dialog.open()
             
         else:
-            print(data)
+            
             return c.inserir_dados(data)
     
     def abrir_card(self):
-        self.add_widget(ListUser(print(self.ids)))
+        self.add_widget(ListUser())
         
 class MyApp(MDApp):
 
