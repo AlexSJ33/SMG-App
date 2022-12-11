@@ -42,26 +42,26 @@ class ConectaBanco:
     def record_data(self):
         try:
             self.connection.commit() # --- Gravar dados na tabela"
-            print('Dados gravados com sucesso') 
         except:
-            print('Impossivel gravar')
+            pass
 
     def close_connection(self): 
         try:
             self.connection.close() # --- Fecha conexão com banco"
         except:
-            print('Erro, não foi possivel fechar a conexão!')
+            pass
     
-    def listar_dados(self):
+    def listar_dados(self,usuarios=''):
         
+        self.connect()
         try:
             cursor = self.connection.cursor()
             cursor.execute("SELECT * FROM usuario")
             usuarios = cursor.fetchall()
-            return usuarios
         except:
             pass
         
+        return usuarios
 
 # c = ConectaBanco()
 # c.connect()

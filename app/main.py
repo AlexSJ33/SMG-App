@@ -6,13 +6,7 @@ from kivy.uix.screenmanager import Screen,ScreenManager
 from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
-
-#from kivy.core.window import Window
 from database import ConectaBanco
-
-#Window.size = (320,580)
-
-
 
 class GerenciadorTelas(ScreenManager):
     pass
@@ -60,8 +54,22 @@ class Account(Screen,ConectaBanco,MDApp):
             self.dialog.open()
             
         else:
+            self.dialog = MDDialog(
+                text="[color=#f9f9f9]Dados gravados com sucesso![/color]",
+                md_bg_color='3c3c3c',
+                )
+        
+            self.dialog.open()
             
             return c.inserir_dados(data)
+
+
+    def limpar_text(self):
+        self.ids.username.text = ''
+        self.ids.email.text = ''
+        self.ids.password.text = ''
+        self.ids.password_2.text = ''
+
     
     def abrir_card(self):
         self.add_widget(ListUser())

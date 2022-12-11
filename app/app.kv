@@ -112,7 +112,9 @@ GerenciadorTelas:
             size_hint_x: .7
             pos_hint: {'center_x': .5,'center_y': .2}
             halign: 'center'
-            on_release: root.pega_valor()
+            on_release: 
+                root.pega_valor()
+                root.limpar_text()
 
         MDTextButton:
             text: 'Listar Usuarios!'
