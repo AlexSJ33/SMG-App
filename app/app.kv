@@ -40,14 +40,14 @@ GerenciadorTelas:
             pos_hint: {'center_x': .5, 'center_y': .42}
         MDLabel:
             text: 'Don´t have an account?'
-            font_size: '14px'
+            font_size: '18px'
             halign: 'center'
             pos_hint: {'center_x': .4, 'center_y': .18}
         MDTextButton:
             text: 'Register Here!'
             theme_text_color: 'Custom'
             text_color: 'purple'
-            font_size: '12px'
+            font_size: '16px'
             focus_color: 1, 0, 1, 1
             pos_hint: {'center_x': .8, 'center_y': .18}
             on_release:
@@ -64,6 +64,7 @@ GerenciadorTelas:
             size: self.size
             pos: self.pos
     FloatLayout:
+
 
         MDIconButton:
             pos_hint: {'center_x': .5, 'center_y': .9}
@@ -120,11 +121,26 @@ GerenciadorTelas:
             text: 'Listar Usuarios!'
             theme_text_color: 'Custom'
             text_color: 'green'
-            font_size: '12px'
+            font_size: '16px'
             focus_color: 1, 0, 1, 1
             pos_hint: {'center_x': .5, 'center_y': .1}
             on_release:
                 root.abrir_card()
+        
+        MDBottomAppBar:
+      
+            MDTopAppBar:           
+                title: "Elevation 10"
+                elevation: 10
+                icon: "arrow-left-circle"
+                type: "bottom"
+                mode: "end"
+                size_hint_y: 0
+                on_action_button:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'login'  
+
+
 
                 
 <ListUser>:

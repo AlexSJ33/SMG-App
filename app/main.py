@@ -16,7 +16,6 @@ class Login(Screen):
 
 class ListUser(MDCard):
 
-    
     def exibir_dados(self):
         lista = c.listar_dados()
         for users in lista:
@@ -70,7 +69,7 @@ class Account(Screen,ConectaBanco,MDApp):
         self.ids.password.text = ''
         self.ids.password_2.text = ''
 
-    
+
     def abrir_card(self):
         self.add_widget(ListUser())
         
@@ -80,7 +79,7 @@ class MyApp(MDApp):
         self.theme_cls.primary_palette = 'Purple'
         self.theme_cls.theme_style = 'Dark'
         return Builder.load_file('app.kv')
-    
+
 
 c=ConectaBanco()
 c.connect()
