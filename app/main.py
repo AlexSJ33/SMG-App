@@ -8,11 +8,35 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
 from database import ConectaBanco
 
+
 class GerenciadorTelas(ScreenManager):
     pass
 
 class Login(Screen):
-    pass
+    
+    def login(self):
+        campo_user = self.ids.username.text
+        campo_password = self.ids.password.text
+
+        username = "".join(campo_user.split())
+        password = "".join(campo_password.split())
+
+        if username == '' or password.strip() == '':
+            self.dialog = MDDialog(
+                text="[color=#f9f9f9]Preencha todos os campos ![/color]",
+                md_bg_color='3c3c3c',
+                )
+            self.dialog.open()
+
+
+        return c.valida_login(username,password)
+
+        # lista = c.listar_dados()
+        # for users in lista:
+        #     if not username == users[1] or not password == users[3]:
+        #         print('Usuario não cadastrado')
+        #     else:
+        #         print(f'Encontrado {username} no banco')
 
 class ListUser(MDCard):
 
@@ -29,8 +53,7 @@ class ListUser(MDCard):
                     )
     
     def fechar(self):
-        self.parent.remove_widget(self)
-    
+        self.parent.remove_widget(self)   
 
 class Account(Screen,ConectaBanco,MDApp):
     dialog = None    
@@ -85,6 +108,8 @@ c=ConectaBanco()
 c.connect()
 c.create_table()
 c.listar_dados()
+
+
 
 if __name__=='__main__':
     MyApp().run()

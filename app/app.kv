@@ -26,30 +26,34 @@ GerenciadorTelas:
             size_hint_x: .80
         MDRoundFlatButton:
             text: 'Sign In'
+            font_size: '16px'
             radius: 24, 24, 24, 24
             size_hint_y: .10
             size_hint_x: .7
             pos_hint: {'center_x': .5,'center_y': .3}
             halign: 'center'
+            on_release:
+                root.login()
         MDLabel:
-            text: 'Login Incorret'
+            text: 'Login Incorret !!'
             theme_text_color: 'Custom'
             text_color: 'red'
-            font_size: '14px'
+            font_size: '22px'
             halign: 'center'
             pos_hint: {'center_x': .5, 'center_y': .42}
         MDLabel:
             text: 'Don´t have an account?'
             font_size: '18px'
             halign: 'center'
-            pos_hint: {'center_x': .4, 'center_y': .18}
+            pos_hint: {'center_x': .5, 'center_y': .18}
         MDTextButton:
             text: 'Register Here!'
             theme_text_color: 'Custom'
             text_color: 'purple'
             font_size: '16px'
             focus_color: 1, 0, 1, 1
-            pos_hint: {'center_x': .8, 'center_y': .18}
+            halign: 'center'
+            pos_hint: {'center_x': .5, 'center_y': .14}
             on_release:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'account'
@@ -138,10 +142,7 @@ GerenciadorTelas:
                 size_hint_y: 0
                 on_action_button:
                     root.manager.transition.direction = 'right'
-                    root.manager.current = 'login'  
-
-
-
+                    root.manager.current = 'login'
                 
 <ListUser>:
     id: card

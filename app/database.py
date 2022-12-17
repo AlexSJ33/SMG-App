@@ -63,6 +63,30 @@ class ConectaBanco:
         
         return usuarios
 
+    def valida_login(self, user,senha):
+        
+        try:
+            self.connect
+            cursor = self.connection.cursor()
+            busca = (f"SELECT password FROM usuario WHERE username = '{user}'")
+            cursor.execute(busca)
+
+            results = cursor.fetchall()
+            print(results[0][0])
+            if senha == results[0][0]:
+                print('Bem vindo')
+            else:
+                print('Usuario invalido')            
+        except Exception as e:
+            print('Usuario nao encontrado',e)
+
+
+
+        
+
+        # print(user)
+        # print(senha)
+
 # c = ConectaBanco()
 # c.connect()
 # c.create_table()
