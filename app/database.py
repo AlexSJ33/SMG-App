@@ -1,8 +1,7 @@
 import sqlite3
 
-global tabela
-
 class ConectaBanco:
+    
     
     # --- Criando a conexão com banco de dados "kivy_data.db"
     def __init__(self, name = 'kivy_data.db') -> None:
@@ -63,32 +62,24 @@ class ConectaBanco:
         
         return usuarios
 
-    def valida_login(self, user,senha):
-        
+    def valida_login(self,user,senha):
+        logado = False
+    
+        self.connect()
         try:
-            self.connect
             cursor = self.connection.cursor()
             busca = (f"SELECT password FROM usuario WHERE username = '{user}'")
-            cursor.execute(busca)
-
+            cursor.execute(busca)            
             results = cursor.fetchall()
-            print(results[0][0])
-            if senha == results[0][0]:
-                print('Bem vindo')
-            else:
-                print('Usuario invalido')            
-        except Exception as e:
-            print('Usuario nao encontrado',e)
+        except:
+            pass
 
-
-
+        print(results[0][0])
+        if senha == results[0][0]:
+            logado = True
         
+        return logado
+    
 
-        # print(user)
-        # print(senha)
-
-# c = ConectaBanco()
-# c.connect()
-# c.create_table()
-# c.inserir_dados()
-# c.listar_dados()
+            
+        

@@ -27,17 +27,13 @@ class Login(Screen):
                 md_bg_color='3c3c3c',
                 )
             self.dialog.open()
+        else:
+            return c.valida_login(username,password)
+        
+    def valida(self,log):
+        print(log)
 
-
-        return c.valida_login(username,password)
-
-        # lista = c.listar_dados()
-        # for users in lista:
-        #     if not username == users[1] or not password == users[3]:
-        #         print('Usuario não cadastrado')
-        #     else:
-        #         print(f'Encontrado {username} no banco')
-
+        
 class ListUser(MDCard):
 
     def exibir_dados(self):
