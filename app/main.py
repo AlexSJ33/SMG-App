@@ -18,22 +18,36 @@ class Login(Screen):
         campo_user = self.ids.username.text
         campo_password = self.ids.password.text
 
-        username = "".join(campo_user.split())
-        password = "".join(campo_password.split())
+        self.username = "".join(campo_user.split())
+        self.password = "".join(campo_password.split())
 
-        if username == '' or password.strip() == '':
+        if self.username == '' or self.password.strip() == '':
             self.dialog = MDDialog(
                 text="[color=#f9f9f9]Preencha todos os campos ![/color]",
                 md_bg_color='3c3c3c',
                 )
             self.dialog.open()
+            
         else:
-            return c.valida_login(username,password)
+            return self.username,self.password
         
-    def valida(self,log):
-        print(log)
 
-        
+    def valida_login(self):
+        lista = c.listar_dados()
+        for users in lista:
+            if self.username == '' or self.password == '':
+                self.ids.label_login.text = ' '
+
+            elif (users[1] != self.username and users[3] != self.password):
+                self.ids.label_login.text = 'Login Incorrect !!'
+                self.ids.label_login.text_color= 'red'
+
+            else:                    
+                print(self.username)
+                self.ids.label_login.text = 'Login Accept !!'
+                self.ids.label_login.text_color= 'green'
+            
+
 class ListUser(MDCard):
 
     def exibir_dados(self):
@@ -47,6 +61,7 @@ class ListUser(MDCard):
                             adaptive_height=True,
                         )
                     )
+
     
     def fechar(self):
         self.parent.remove_widget(self)   

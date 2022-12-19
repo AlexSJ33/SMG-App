@@ -61,25 +61,5 @@ class ConectaBanco:
             pass
         
         return usuarios
-
-    def valida_login(self,user,senha):
-        logado = False
-    
-        self.connect()
-        try:
-            cursor = self.connection.cursor()
-            busca = (f"SELECT password FROM usuario WHERE username = '{user}'")
-            cursor.execute(busca)            
-            results = cursor.fetchall()
-        except:
-            pass
-
-        print(results[0][0])
-        if senha == results[0][0]:
-            logado = True
-        
-        return logado
-    
-
-            
+  
         
