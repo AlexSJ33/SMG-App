@@ -35,18 +35,21 @@ class Login(Screen):
     def valida_login(self):
         lista = c.listar_dados()
         for users in lista:
+
             if self.username == '' or self.password == '':
                 self.ids.label_login.text = ' '
 
-            elif (users[1] != self.username and users[3] != self.password):
-                self.ids.label_login.text = 'Login Incorrect !!'
-                self.ids.label_login.text_color= 'red'
-
-            else:                    
+            elif self.username == users[1] and self.password == users[3]:
                 print(self.username)
                 self.ids.label_login.text = 'Login Accept !!'
                 self.ids.label_login.text_color= 'green'
-            
+                break
+            else:
+                self.ids.label_login.text = 'Login Incorrect !!'
+                self.ids.label_login.text_color = 'red'
+
+        #print(usuario, senha)                       
+        
 
 class ListUser(MDCard):
 
