@@ -7,13 +7,29 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
 from database import ConectaBanco
+from kivy.core.window import Window
+Window.size = (350, 580)
+
+global tela
+global autenticado
+tela = ScreenManager()
+autenticado = []
 
 
-class GerenciadorTelas(ScreenManager):
+class Inicio(Screen):
+    pass
+
+class Menu(Screen):
+
+    def on_enter(self):
+        name = autenticado[0]
+        self.ids.label_menu.text = 'Olá ' + str(name)
+
+class GestaoUsuario(Screen):
     pass
 
 class Login(Screen):
-    
+
     def login(self):
         campo_user = self.ids.username.text
         campo_password = self.ids.password.text
@@ -30,7 +46,6 @@ class Login(Screen):
             
         else:
             return self.username,self.password
-        
 
     def valida_login(self):
         lista = c.listar_dados()
@@ -43,12 +58,14 @@ class Login(Screen):
                 print(self.username)
                 self.ids.label_login.text = 'Login Accept !!'
                 self.ids.label_login.text_color= 'green'
+                MDApp.get_running_app().root.current = 'menu'
+                autenticado.append(self.username)
                 break
+                
             else:
                 self.ids.label_login.text = 'Login Incorrect !!'
                 self.ids.label_login.text_color = 'red'
-
-        #print(usuario, senha)                       
+    
         
 
 class ListUser(MDCard):
@@ -69,7 +86,7 @@ class ListUser(MDCard):
     def fechar(self):
         self.parent.remove_widget(self)   
 
-class Account(Screen,ConectaBanco,MDApp):
+class Account(Screen,ConectaBanco):
     dialog = None    
     def pega_valor(self):
         username = self.ids.username.text
@@ -109,13 +126,12 @@ class Account(Screen,ConectaBanco,MDApp):
 
     def abrir_card(self):
         self.add_widget(ListUser())
-        
-class MyApp(MDApp):
 
-    def build(self):
-        self.theme_cls.primary_palette = 'Purple'
-        self.theme_cls.theme_style = 'Dark'
-        return Builder.load_file('app.kv')
+tela.add_widget(Inicio(name='inicio'))
+tela.add_widget(Login(name='login'))
+tela.add_widget(Menu(name='menu'))
+tela.add_widget(Account(name='account'))
+#tela.add_widget(ListUser(name='listuser'))
 
 
 c=ConectaBanco()
@@ -123,10 +139,15 @@ c.connect()
 c.create_table()
 c.listar_dados()
 
+class MyApp(MDApp):
+
+    def build(self):
+        kv = Builder.load_file('app.kv')
+        tela = kv
+        self.theme_cls.primary_palette = 'Purple'
+        self.theme_cls.theme_style = 'Dark'
+        return tela
 
 
 if __name__=='__main__':
     MyApp().run()
-
-
-

@@ -1,10 +1,29 @@
-GerenciadorTelas:
+ScreenManager:
+    Inicio:
     Login:
     Account:
+    Menu:
+    GestaoUsuario:
 
+<Inicio>:
+    name: 'inicio'
+    MDFloatLayout:
+
+        MDLabel:
+            text: "B e m - v i n d o !"
+            font_size: "28sp"
+            halign: 'center'
+            pos_hint: {"center_x": .5, "center_y": .70}    
+          
+        MDIconButton:
+            icon: "arrow-right-circle"
+            user_font_size: "88sp"
+            pos_hint: {"center_x": .5, "center_y": .12}      
+            on_press: app.root.current = 'login'
+                 
 <Login>:
     name:'login'
-    FloatLayout:
+    MDFloatLayout:
         
         MDIconButton:
             pos_hint: {'center_x': .5, 'center_y': .8}
@@ -34,45 +53,109 @@ GerenciadorTelas:
             halign: 'center'
             on_release:
                 root.login()
-                root.valida_login()
+                root.valida_login() 
                 
         MDLabel:
             id: label_login
             text: ' '
             theme_text_color: 'Custom'
-            #text_color: 'green'
             font_size: '22px'
             halign: 'center'
             pos_hint: {'center_x': .5, 'center_y': .42}
+
+
+<Menu>
+    name: 'menu'
+
+    MDBoxLayout:
+        #md_bg_color: 'dimgray'
+        orientation:'vertical'
+                      
+        MDBoxLayout:
+            size_hint_y:.25
+            padding:dp(25)
+            MDBoxLayout:
+                MDLabel:                            
+                    text:"Teste"
+                    halign: "center"
+                    font_size: "22sp"
+                    
+                    pos_hint: {"center_x": .5, "center_y": .95}  
+                    id: label_menu
+    MDGridLayout:
+        size_hint_y:.55
+        cols:2
+        padding:[dp(15),dp(15),dp(15),dp(35)]
+        spacing:dp(15)
+
+        ElementCard:
+            image:"imagens/target.png"
+            text:"Gestão de Clientes"
+            md_bg_color:'gray'
             
-        MDLabel:
-            text: 'Don´t have an account?'
-            font_size: '18px'
-            halign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': .18}
-        MDTextButton:
-            text: 'Register Here!'
-            theme_text_color: 'Custom'
-            text_color: 'purple'
-            font_size: '16px'
-            focus_color: 1, 0, 1, 1
-            halign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': .14}
+            #on_release: app.root.current = 'precheck'
+            
+        ElementCard:
+            image:"imagens/fornecedor.png"
+            text:"Gestão de Fornecedor"
+            md_bg_color:'gray'
+            #on_release: app.root.current = 'meds'
+            
+        ElementCard:
+            image:"imagens/box.png"
+            text:"Gestão de Produto"
+            md_bg_color: 'gray'
+            #on_release: app.root.current = 'activities'
+
+        ElementCard:
+            image:"imagens/users.png"
+            text:"Gestão de Usuário"
+            md_bg_color: 'gray'
             on_release:
-                root.manager.transition.direction = 'left'
-                root.manager.current = 'account'
+                app.root.transition.direction = 'left'
+                app.root.current = 'gestao_usuario'  
+
+<ElementCard@MDCard>:
+    md_bg_color: 120/255, 173/255, 173/255, 1
+    padding:dp(10)
+    spacing:dp(10)
+    radius:dp(25)
+    ripple_behavior: True
+    image:''
+    text:""
+    items_count:""
+    subtext:''
+  
+    orientation:'vertical'
+    Image:
+        source:root.image
+    MDBoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            halign:"center"
+            text:root.text
+            font_size: "15sp" 
+            #font_name: "Poppins-Medium.ttf"
+        MDLabel:
+            halign:"center"
+            font_style:"Caption"
+            text:root.subtext
+        MDLabel:
+            halign:"center"
+            text:root.items_count
+
 
 <Account>:
     name:'account'
-    canvas.before:
-        Color:
-            rgba: (0,1,0,0)
+    MDFloatLayout:
 
-        Rectangle:
-            size: self.size
-            pos: self.pos
-    FloatLayout:
-
+        MDIconButton:
+            pos_hint: {'center_x': .1, 'center_y': .9}
+            icon: 'arrow-left-bold-circle'
+            icon_size: '28sp'
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'      
 
         MDIconButton:
             pos_hint: {'center_x': .5, 'center_y': .9}
@@ -134,22 +217,9 @@ GerenciadorTelas:
             pos_hint: {'center_x': .5, 'center_y': .1}
             on_release:
                 root.abrir_card()
-        
-        MDBottomAppBar:
-      
-            MDTopAppBar:           
-                title: "Elevation 10"
-                elevation: 10
-                icon: "arrow-left-circle"
-                type: "bottom"
-                mode: "end"
-                size_hint_y: 0
-                on_action_button:
-                    root.manager.transition.direction = 'right'
-                    root.manager.current = 'login'
-                
+
 <ListUser>:
-    id: card
+    id: listuser
     orientation: "vertical"
     padding: "8dp"
     size_hint: .7, .7
@@ -183,3 +253,63 @@ GerenciadorTelas:
         theme_icon_color: "Custom"
         icon_color: "orange"
         on_release: root.fechar()
+
+<GestaoUsuario>:
+    name: 'gestao_usuario'
+    MDFloatLayout:
+
+        MDLabel:
+            text: "Gestão de Usuário"
+            font_size: "28sp"
+            halign: 'center'
+            pos_hint: {"center_x": .5, "center_y": .85}
+
+        MDFillRoundFlatButton:
+            text: "Cadastrar Usuário"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .60}
+            on_release:
+                app.root.transition.direction = 'left'
+                app.root.current = 'account'            
+
+        MDFillRoundFlatButton:
+            text: "Editar Usuário"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .50}
+
+        MDFillRoundFlatButton:
+            text: "Deletar Usuário"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .40}            
+
+
+        MDFillRoundFlatButton:
+            text: "Exibir Usuário"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .30}            
+
+
+        MDFillRoundFlatButton:
+            text: "Listar Usuários"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .20}  
+          
+        MDIconButton:
+            icon: "arrow-left-circle"
+            icon_size: "32sp"
+            
+            pos_hint: {"center_x": .5, "center_y": .10}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'               
+            
