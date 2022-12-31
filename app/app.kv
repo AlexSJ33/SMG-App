@@ -1,9 +1,10 @@
 ScreenManager:
     Inicio:
     Login:
-    Account:
+
     Menu:
     GestaoUsuario:
+    GestaoCliente:
 
 <Inicio>:
     name: 'inicio'
@@ -68,7 +69,7 @@ ScreenManager:
     name: 'menu'
 
     MDBoxLayout:
-        #md_bg_color: 'dimgray'
+        md_bg_color: '#B0C4DE'
         orientation:'vertical'
                       
         MDBoxLayout:
@@ -92,20 +93,22 @@ ScreenManager:
             image:"imagens/target.png"
             text:"Gestão de Clientes"
             md_bg_color:'gray'
+            on_release:
+                app.root.transition.direction = 'left'
+                app.root.current = 'gestao_cliente'             
             
-            #on_release: app.root.current = 'precheck'
             
         ElementCard:
             image:"imagens/fornecedor.png"
             text:"Gestão de Fornecedor"
             md_bg_color:'gray'
-            #on_release: app.root.current = 'meds'
+            
             
         ElementCard:
             image:"imagens/box.png"
             text:"Gestão de Produto"
             md_bg_color: 'gray'
-            #on_release: app.root.current = 'activities'
+            
 
         ElementCard:
             image:"imagens/users.png"
@@ -135,7 +138,7 @@ ScreenManager:
             halign:"center"
             text:root.text
             font_size: "15sp" 
-            #font_name: "Poppins-Medium.ttf"
+            
         MDLabel:
             halign:"center"
             font_style:"Caption"
@@ -145,78 +148,91 @@ ScreenManager:
             text:root.items_count
 
 
-<Account>:
-    name:'account'
-    MDFloatLayout:
+# <Account>:
+#     name:'account'
+#     MDFloatLayout:
+#         md_bg_color:"#696969"
+#         MDIconButton:
+#             pos_hint: {'center_x': .1, 'center_y': .9}
+#             icon: 'arrow-left-bold-circle'
+#             icon_size: '28sp'
+#             on_release:
+#                 root.limpar_text()
+#                 root.manager.transition.direction = 'right'
+#                 root.manager.current = 'gestao_usuario'      
 
-        MDIconButton:
-            pos_hint: {'center_x': .1, 'center_y': .9}
-            icon: 'arrow-left-bold-circle'
-            icon_size: '28sp'
-            on_release:
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'menu'      
-
-        MDIconButton:
-            pos_hint: {'center_x': .5, 'center_y': .9}
-            icon: 'account-edit'
-            icon_size: '96sp'
-        MDLabel:
-            text: 'Create Your Account'
-            theme_text_color: 'Custom'
-            text_color: 'yellow'                
-            font_size: '18px'
-            halign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': .8}
-        MDTextField:
-            id: username
-            hint_text: 'Username'
-            icon_left: 'account'
-            pos_hint: {'center_x': .5, 'center_y': .7}
-            size_hint_x: .80
-            multiline: False
-            required: True
+#         MDIconButton:
+#             pos_hint: {'center_x': .5, 'center_y': .9}
+#             icon: 'account-edit'
+#             icon_size: '96sp'
+#         MDLabel:
+#             text: 'Create Your Account'
+#             theme_text_color: 'Custom'
+#             text_color: 'yellow'                
+#             font_size: '18px'
+#             halign: 'center'
+#             pos_hint: {'center_x': .5, 'center_y': .8}
+#         MDTextField:
+#             id: username
+#             hint_text: 'Username'
+#             hint_text_color_normal: "lightgray"
+#             text_color_normal: "white"
+#             icon_left: 'account'
+#             pos_hint: {'center_x': .5, 'center_y': .7}
+#             size_hint_x: .80
+#             multiline: False
+            
               
-        MDTextField:
-            id: email
-            hint_text: 'E-Mail'
-            icon_left: 'email'
-            pos_hint: {'center_x': .5, 'center_y': .6}
-            size_hint_x: .80
-        MDTextField:
-            id: password
-            hint_text: 'Password'
-            password: True
-            icon_left: 'key-variant'
-            pos_hint: {'center_x': .5, 'center_y': .5}
-            size_hint_x: .80
-        MDTextField:
-            id: password_2
-            hint_text: 'Repeat Password'
-            password: True
-            icon_left: 'key-variant'
-            pos_hint: {'center_x': .5, 'center_y': .4}
-            size_hint_x: .80
-        MDRoundFlatButton:
-            text: 'Sign UP'
-            radius: 24, 24, 24, 24
-            size_hint_y: .10
-            size_hint_x: .7
-            pos_hint: {'center_x': .5,'center_y': .2}
-            halign: 'center'
-            on_release: 
-                root.pega_valor()
-                root.limpar_text()
+#         MDTextField:
+#             id: email
+#             hint_text: 'E-Mail'
+#             hint_text_color_normal: "lightgray"
+#             text_color_normal: "white"
+#             icon_left: 'email'
+#             pos_hint: {'center_x': .5, 'center_y': .6}
+#             size_hint_x: .80
+#             multiline: False
+#         MDTextField:
+#             id: password
+#             hint_text: 'Password'
+#             hint_text_color_normal: "lightgray"
+#             text_color_normal: "white"
+#             password: True
+#             icon_left: 'key-variant'
+            
+#             pos_hint: {'center_x': .5, 'center_y': .5}
+#             size_hint_x: .80
+#             multiline: False
+#         MDTextField:
+#             id: password_2
+#             hint_text: 'Repeat Password'
+#             hint_text_color_normal: "lightgray"
+#             text_color_normal: "white"
+#             password: True
+#             icon_left: 'key-variant'
+#             pos_hint: {'center_x': .5, 'center_y': .4}
+#             size_hint_x: .80
+#             multiline: False
+#         MDRoundFlatButton:
+#             text: 'Sign UP'
+#             radius: 24, 24, 24, 24
+#             size_hint_y: .10
+#             size_hint_x: .7
+#             pos_hint: {'center_x': .5,'center_y': .2}
+#             halign: 'center'
+#             on_release: 
+#                 root.pega_valor()
+#                 root.limpar_text()
 
-        MDTextButton:
-            text: 'Listar Usuarios!'
-            theme_text_color: 'Custom'
-            text_color: 'green'
-            font_size: '16px'
-            focus_color: 1, 0, 1, 1
-            pos_hint: {'center_x': .5, 'center_y': .1}
-            on_release:
-                root.abrir_card()
+#         MDTextButton:
+#             text: 'Listar Usuarios!'
+#             theme_text_color: 'Custom'
+#             text_color: 'green'
+#             font_size: '16px'
+#             focus_color: 1, 0, 1, 1
+#             pos_hint: {'center_x': .5, 'center_y': .1}
+#             on_release:
+#                 root.abrir_card()
 
 <ListUser>:
     id: listuser
@@ -252,12 +268,12 @@ ScreenManager:
         icon_size: "32sp"
         theme_icon_color: "Custom"
         icon_color: "orange"
-        on_release: root.fechar()
+        on_press: root.fechar()
 
 <GestaoUsuario>:
     name: 'gestao_usuario'
     MDFloatLayout:
-
+        md_bg_color:"#696969"
         MDLabel:
             text: "Gestão de Usuário"
             font_size: "28sp"
@@ -270,9 +286,11 @@ ScreenManager:
             halign: 'center'
             size_hint_x: .80
             pos_hint: {"center_x": .5, "center_y": .60}
-            on_release:
-                app.root.transition.direction = 'left'
-                app.root.current = 'account'            
+            #md_bg_color: '#B0C4DE'
+            on_press:
+                # app.root.transition.direction = 'left'
+                # app.root.current = 'account'
+                root.cad_usuario()
 
         MDFillRoundFlatButton:
             text: "Editar Usuário"
@@ -280,13 +298,15 @@ ScreenManager:
             halign: 'center'
             size_hint_x: .80
             pos_hint: {"center_x": .5, "center_y": .50}
+            #md_bg_color: '#B0C4DE'
 
         MDFillRoundFlatButton:
             text: "Deletar Usuário"
             font_size: "18sp"
             halign: 'center'
             size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .40}            
+            pos_hint: {"center_x": .5, "center_y": .40}
+            #md_bg_color: '#B0C4DE'
 
 
         MDFillRoundFlatButton:
@@ -294,7 +314,8 @@ ScreenManager:
             font_size: "18sp"
             halign: 'center'
             size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .30}            
+            pos_hint: {"center_x": .5, "center_y": .30}
+            #md_bg_color: '#B0C4DE'
 
 
         MDFillRoundFlatButton:
@@ -302,7 +323,10 @@ ScreenManager:
             font_size: "18sp"
             halign: 'center'
             size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .20}  
+            pos_hint: {"center_x": .5, "center_y": .20}
+            on_press: root.exibir_dados()
+    
+            #md_bg_color: '#B0C4DE'
           
         MDIconButton:
             icon: "arrow-left-circle"
@@ -311,5 +335,330 @@ ScreenManager:
             pos_hint: {"center_x": .5, "center_y": .10}
             on_release:
                 root.manager.transition.direction = 'right'
-                root.manager.current = 'menu'               
+                root.manager.current = 'menu'
+
+<CadastrarUsuario>:
+    orientation: "vertical"
+    padding: "0dp"
+    size_hint: .9, .9
+    pos_hint: {"center_x": .5, "center_y": .5}
+    #md_bg_color: 'azure'
+    MDFloatLayout:
+        orientation: "vertical"
+        md_bg_color:'azure'
+        padding: "1dp"
+
+        MDTopAppBar:
+            id: toolbar
+            elevation: 1
+            pos_hint: {"center_x": .5, "center_y": .94}
+            md_bg_color: 'green'
+
+        MDLabel:
+            text: 'NOVO USUÁRIO'
+            color: 'white'
+            halign: 'center'
+            pos_hint: {"center_x": .5, "center_y": .94}
+
+        MDIconButton:
+            pos_hint: {'center_x': .5, 'center_y': .8}
+            icon: 'account-edit'
+            icon_size: '76sp'
+
+        MDTextField:
+            id: usuario
+            hint_text: 'Usuário'
+            pos_hint: {'center_x': .5, 'center_y': .6}
+            size_hint_x: .80
+            multiline: False
+
+        MDTextField:
+            id: email
+            hint_text: 'E-mail'
+            icon_right: 'email'
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint_x: .80
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: senha
+            hint_text: 'Senha'
+            icon_right: 'eye-off'
+            password: True
+            pos_hint: {'center_x': .5, 'center_y': .4}
+            size_hint_x: .80
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: re_senha
+            hint_text: 'Repetir Senha'
+            icon_right: 'eye-off'
+            password: True
+            pos_hint: {'center_x': .5, 'center_y': .3}
+            size_hint_x: .80
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDCheckbox:
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {'center_x': .2, 'center_y': .2}
+
+
+        MDLabel:
+            text: 'Administrador'
+            color: 'gray'
+            halign: 'right'
+            pos_hint: {"center_x": .1, "center_y": .2}
+
+
+
+        MDRaisedButton:
+            text: "Cancelar"
+            md_bg_color: "red"
+            pos_hint: {'center_x': .3, 'center_y': .1}
+            on_release:
+                root.fechar()
+
+        MDRaisedButton:
+            text: "Salvar"
+            md_bg_color: "green"
+            pos_hint: {'center_x': .7, 'center_y': .1}
+            on_release:
+                root.pega_valor()
+                root.limpar_text()
+<ListarUsuarios>
+    orientation: "vertical"
+    padding: "0dp"
+    size_hint: .9, .9
+    pos_hint: {"center_x": .5, "center_y": .5}
+    md_bg_color: 'azure'
+
+
+
+    MDTopAppBar:
+        elevation: 1
+        md_bg_color: 'green'
+
+        MDLabel:
             
+            text: 'LISTA DE USUÁRIOS'
+            color: 'white'
+            halign: 'center'
+            #size_hint: .9, .10
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+
+    ScrollView:
+
+        MDList:
+            id: box
+                
+
+    MDIconButton:
+        icon: "close-circle-outline"
+        pos_hint: {"center_x": .5, "center_y": .1}    
+        icon_size: "32sp"
+        theme_icon_color: "Custom"
+        icon_color: "orange"
+        on_release: root.fechar()
+
+
+
+
+<GestaoCliente>:
+    name: 'gestao_cliente'
+    MDFloatLayout:
+        md_bg_color:"#696969"
+
+        MDLabel:
+            text: "Gestão de Clientes"
+            font_size: "28sp"
+            halign: 'center'
+            pos_hint: {"center_x": .5, "center_y": .85}
+
+        MDFillRoundFlatButton:
+            text: "Cadastrar Cliente"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .60}
+            on_press:
+                root.cad_cliente()
+    
+
+        MDFillRoundFlatButton:
+            text: "Editar Cliente"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .50}
+
+        MDFillRoundFlatButton:
+            text: "Deletar Cliente"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .40}            
+
+
+        MDFillRoundFlatButton:
+            text: "Exibir Cliente"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .30}            
+
+
+        MDFillRoundFlatButton:
+            text: "Listar Clientes"
+            font_size: "18sp"
+            halign: 'center'
+            size_hint_x: .80
+            pos_hint: {"center_x": .5, "center_y": .20}
+
+          
+        MDIconButton:
+            icon: "arrow-left-circle"
+            icon_size: "32sp"
+            
+            pos_hint: {"center_x": .5, "center_y": .10}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
+    
+<CadastrarCliente>:
+    id: cadastro
+    orientation: "vertical"
+    padding: "0dp"
+    size_hint: .9, .9
+    pos_hint: {"center_x": .5, "center_y": .5}
+    #md_bg_color: 'azure'
+    MDFloatLayout:
+        orientation: "vertical"
+        md_bg_color:'azure'
+        
+        padding: "1dp"
+
+        MDTopAppBar:
+            id: toolbar
+            elevation: 1
+            pos_hint: {"center_x": .5, "center_y": .94}
+
+        MDLabel:
+            text: 'NOVO CLIENTE'
+            color: 'white'
+            halign: 'center'
+            pos_hint: {"center_x": .5, "center_y": .94}
+            
+            
+
+        MDTextField:
+            id: nome
+            hint_text: 'Nome'
+            pos_hint: {'center_x': .5, 'center_y': .8}
+            size_hint_x: .80
+            multiline: False
+            #line_color_normal: "gray"
+            #hint_text_color_normal: "gray"
+            #text_color: 'white'
+
+        MDTextField:
+            id: cpf
+            hint_text: 'CPF'
+
+            pos_hint: {'center_x': .5, 'center_y': .7}
+            size_hint_x: .80
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: email
+            hint_text: 'E-mail'
+            pos_hint: {'center_x': .3, 'center_y': .6}
+            size_hint_x: .40
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: telefone
+            hint_text: 'Telefone'
+            pos_hint: {'center_x': .7, 'center_y': .6}
+            size_hint_x: .40
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: cep
+            hint_text: 'CEP'
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint_x: .80
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: cidade
+            hint_text: 'Cidade'
+            pos_hint: {'center_x': .3, 'center_y': .4}
+            size_hint_x: .40
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: uf
+            hint_text: 'UF'
+            pos_hint: {'center_x': .7, 'center_y': .4}
+            size_hint_x: .40
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: endereco
+            hint_text: 'Endereço'
+            pos_hint: {'center_x': .3, 'center_y': .3}
+            size_hint_x: .40
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: numero
+            hint_text: 'Número'
+            pos_hint: {'center_x': .7, 'center_y': .3}
+            size_hint_x: .40
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+        MDTextField:
+            id: bairro
+            hint_text: 'Bairro'
+            pos_hint: {'center_x': .5, 'center_y': .2}
+            size_hint_x: .80
+            multiline: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"
+
+
+        MDRaisedButton:
+            text: "Cancelar"
+            md_bg_color: "red"
+            pos_hint: {'center_x': .3, 'center_y': .1}
+            on_release:
+                root.fechar()
+
+        MDRaisedButton:
+            text: "Salvar"
+            md_bg_color: "green"
+            pos_hint: {'center_x': .7, 'center_y': .1}
