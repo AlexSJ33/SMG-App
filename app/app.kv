@@ -1,7 +1,6 @@
 ScreenManager:
     Inicio:
     Login:
-
     Menu:
     GestaoUsuario:
     GestaoCliente:
@@ -36,7 +35,9 @@ ScreenManager:
             hint_text: 'Username'
             pos_hint: {'center_x': .5, 'center_y': .6}
             size_hint_x: .80
-            
+            multiline: False
+            write_tab: False
+
         MDTextField:
             id: password
             hint_text: 'Password'
@@ -44,6 +45,8 @@ ScreenManager:
             icon_right: 'eye-off'
             pos_hint: {'center_x': .5, 'center_y': .5}
             size_hint_x: .80
+            multiline: False
+            write_tab: False
         MDRoundFlatButton:
             text: 'Sign In'
             font_size: '16px'
@@ -64,7 +67,6 @@ ScreenManager:
             halign: 'center'
             pos_hint: {'center_x': .5, 'center_y': .42}
 
-
 <Menu>
     name: 'menu'
 
@@ -75,13 +77,13 @@ ScreenManager:
         MDBoxLayout:
             size_hint_y:.25
             padding:dp(25)
+
             MDBoxLayout:
                 MDLabel:                            
                     text:"Teste"
                     halign: "center"
                     font_size: "22sp"
-                    
-                    pos_hint: {"center_x": .5, "center_y": .95}  
+                    pos_hint: {"center_x": .5, "center_y": .95}
                     id: label_menu
     MDGridLayout:
         size_hint_y:.55
@@ -95,8 +97,7 @@ ScreenManager:
             md_bg_color:'gray'
             on_release:
                 app.root.transition.direction = 'left'
-                app.root.current = 'gestao_cliente'             
-            
+                app.root.current = 'gestao_cliente'
             
         ElementCard:
             image:"imagens/fornecedor.png"
@@ -128,8 +129,8 @@ ScreenManager:
     text:""
     items_count:""
     subtext:''
-  
     orientation:'vertical'
+
     Image:
         source:root.image
     MDBoxLayout:
@@ -138,7 +139,6 @@ ScreenManager:
             halign:"center"
             text:root.text
             font_size: "15sp" 
-            
         MDLabel:
             halign:"center"
             font_style:"Caption"
@@ -146,129 +146,6 @@ ScreenManager:
         MDLabel:
             halign:"center"
             text:root.items_count
-
-
-# <Account>:
-#     name:'account'
-#     MDFloatLayout:
-#         md_bg_color:"#696969"
-#         MDIconButton:
-#             pos_hint: {'center_x': .1, 'center_y': .9}
-#             icon: 'arrow-left-bold-circle'
-#             icon_size: '28sp'
-#             on_release:
-#                 root.limpar_text()
-#                 root.manager.transition.direction = 'right'
-#                 root.manager.current = 'gestao_usuario'      
-
-#         MDIconButton:
-#             pos_hint: {'center_x': .5, 'center_y': .9}
-#             icon: 'account-edit'
-#             icon_size: '96sp'
-#         MDLabel:
-#             text: 'Create Your Account'
-#             theme_text_color: 'Custom'
-#             text_color: 'yellow'                
-#             font_size: '18px'
-#             halign: 'center'
-#             pos_hint: {'center_x': .5, 'center_y': .8}
-#         MDTextField:
-#             id: username
-#             hint_text: 'Username'
-#             hint_text_color_normal: "lightgray"
-#             text_color_normal: "white"
-#             icon_left: 'account'
-#             pos_hint: {'center_x': .5, 'center_y': .7}
-#             size_hint_x: .80
-#             multiline: False
-            
-              
-#         MDTextField:
-#             id: email
-#             hint_text: 'E-Mail'
-#             hint_text_color_normal: "lightgray"
-#             text_color_normal: "white"
-#             icon_left: 'email'
-#             pos_hint: {'center_x': .5, 'center_y': .6}
-#             size_hint_x: .80
-#             multiline: False
-#         MDTextField:
-#             id: password
-#             hint_text: 'Password'
-#             hint_text_color_normal: "lightgray"
-#             text_color_normal: "white"
-#             password: True
-#             icon_left: 'key-variant'
-            
-#             pos_hint: {'center_x': .5, 'center_y': .5}
-#             size_hint_x: .80
-#             multiline: False
-#         MDTextField:
-#             id: password_2
-#             hint_text: 'Repeat Password'
-#             hint_text_color_normal: "lightgray"
-#             text_color_normal: "white"
-#             password: True
-#             icon_left: 'key-variant'
-#             pos_hint: {'center_x': .5, 'center_y': .4}
-#             size_hint_x: .80
-#             multiline: False
-#         MDRoundFlatButton:
-#             text: 'Sign UP'
-#             radius: 24, 24, 24, 24
-#             size_hint_y: .10
-#             size_hint_x: .7
-#             pos_hint: {'center_x': .5,'center_y': .2}
-#             halign: 'center'
-#             on_release: 
-#                 root.pega_valor()
-#                 root.limpar_text()
-
-#         MDTextButton:
-#             text: 'Listar Usuarios!'
-#             theme_text_color: 'Custom'
-#             text_color: 'green'
-#             font_size: '16px'
-#             focus_color: 1, 0, 1, 1
-#             pos_hint: {'center_x': .5, 'center_y': .1}
-#             on_release:
-#                 root.abrir_card()
-
-<ListUser>:
-    id: listuser
-    orientation: "vertical"
-    padding: "8dp"
-    size_hint: .7, .7
-    size: "280dp", "180dp"
-    pos_hint: {"center_x": .5, "center_y": .5}
-
-    MDTextButton:
-        text: "Usuários"
-        theme_text_color: "Secondary"
-        pos_hint: {'center_x': .5, 'center_y': .1}
-        size_hint_y: None
-        height: self.texture_size[1]
-        on_release: root.exibir_dados()
-    
-
-    MDSeparator:
-        height: "1dp"
-
-    ScrollView:
-        scroll_type: ['bars', 'content']
-        bar_width: 10
-
-        MDList:
-            id: box
-            spacing: "8dp"
-
-    MDIconButton:
-        icon: "close-circle-outline"
-        pos_hint: {"center_x": .5, "center_y": .5}    
-        icon_size: "32sp"
-        theme_icon_color: "Custom"
-        icon_color: "orange"
-        on_press: root.fechar()
 
 <GestaoUsuario>:
     name: 'gestao_usuario'
@@ -286,10 +163,7 @@ ScreenManager:
             halign: 'center'
             size_hint_x: .80
             pos_hint: {"center_x": .5, "center_y": .60}
-            #md_bg_color: '#B0C4DE'
             on_press:
-                # app.root.transition.direction = 'left'
-                # app.root.current = 'account'
                 root.cad_usuario()
 
         MDFillRoundFlatButton:
@@ -298,7 +172,6 @@ ScreenManager:
             halign: 'center'
             size_hint_x: .80
             pos_hint: {"center_x": .5, "center_y": .50}
-            #md_bg_color: '#B0C4DE'
 
         MDFillRoundFlatButton:
             text: "Deletar Usuário"
@@ -306,8 +179,6 @@ ScreenManager:
             halign: 'center'
             size_hint_x: .80
             pos_hint: {"center_x": .5, "center_y": .40}
-            #md_bg_color: '#B0C4DE'
-
 
         MDFillRoundFlatButton:
             text: "Exibir Usuário"
@@ -315,8 +186,6 @@ ScreenManager:
             halign: 'center'
             size_hint_x: .80
             pos_hint: {"center_x": .5, "center_y": .30}
-            #md_bg_color: '#B0C4DE'
-
 
         MDFillRoundFlatButton:
             text: "Listar Usuários"
@@ -325,8 +194,6 @@ ScreenManager:
             size_hint_x: .80
             pos_hint: {"center_x": .5, "center_y": .20}
             on_press: root.exibir_dados()
-    
-            #md_bg_color: '#B0C4DE'
           
         MDIconButton:
             icon: "arrow-left-circle"
@@ -342,7 +209,7 @@ ScreenManager:
     padding: "0dp"
     size_hint: .9, .9
     pos_hint: {"center_x": .5, "center_y": .5}
-    #md_bg_color: 'azure'
+    
     MDFloatLayout:
         orientation: "vertical"
         md_bg_color:'azure'
@@ -371,6 +238,7 @@ ScreenManager:
             pos_hint: {'center_x': .5, 'center_y': .6}
             size_hint_x: .80
             multiline: False
+            write_tab: False
 
         MDTextField:
             id: email
@@ -379,6 +247,7 @@ ScreenManager:
             pos_hint: {'center_x': .5, 'center_y': .5}
             size_hint_x: .80
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -390,6 +259,7 @@ ScreenManager:
             pos_hint: {'center_x': .5, 'center_y': .4}
             size_hint_x: .80
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -401,6 +271,7 @@ ScreenManager:
             pos_hint: {'center_x': .5, 'center_y': .3}
             size_hint_x: .80
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -450,7 +321,7 @@ ScreenManager:
             text: 'LISTA DE USUÁRIOS'
             color: 'white'
             halign: 'center'
-            #size_hint: .9, .10
+            
             pos_hint: {"center_x": .5, "center_y": .5}
 
 
@@ -538,7 +409,7 @@ ScreenManager:
     padding: "0dp"
     size_hint: .9, .9
     pos_hint: {"center_x": .5, "center_y": .5}
-    #md_bg_color: 'azure'
+    
     MDFloatLayout:
         orientation: "vertical"
         md_bg_color:'azure'
@@ -564,17 +435,15 @@ ScreenManager:
             pos_hint: {'center_x': .5, 'center_y': .8}
             size_hint_x: .80
             multiline: False
-            #line_color_normal: "gray"
-            #hint_text_color_normal: "gray"
-            #text_color: 'white'
+            write_tab: False
 
         MDTextField:
             id: cpf
             hint_text: 'CPF'
-
             pos_hint: {'center_x': .5, 'center_y': .7}
             size_hint_x: .80
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -584,6 +453,7 @@ ScreenManager:
             pos_hint: {'center_x': .3, 'center_y': .6}
             size_hint_x: .40
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -593,6 +463,7 @@ ScreenManager:
             pos_hint: {'center_x': .7, 'center_y': .6}
             size_hint_x: .40
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -602,6 +473,7 @@ ScreenManager:
             pos_hint: {'center_x': .5, 'center_y': .5}
             size_hint_x: .80
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -611,6 +483,7 @@ ScreenManager:
             pos_hint: {'center_x': .3, 'center_y': .4}
             size_hint_x: .40
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -620,6 +493,7 @@ ScreenManager:
             pos_hint: {'center_x': .7, 'center_y': .4}
             size_hint_x: .40
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -629,6 +503,7 @@ ScreenManager:
             pos_hint: {'center_x': .3, 'center_y': .3}
             size_hint_x: .40
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -638,6 +513,7 @@ ScreenManager:
             pos_hint: {'center_x': .7, 'center_y': .3}
             size_hint_x: .40
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
@@ -647,6 +523,7 @@ ScreenManager:
             pos_hint: {'center_x': .5, 'center_y': .2}
             size_hint_x: .80
             multiline: False
+            write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
