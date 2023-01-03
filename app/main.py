@@ -119,7 +119,8 @@ class CadastrarCliente(MDCard):
         self.parent.remove_widget(self)   
 
 class CadastrarUsuario(MDCard):
-    dialog = None    
+    dialog = None
+    admin = '0'   
     def get_usuario(self):
         usuario = self.ids.usuario.text
         usuario = "".join(usuario.split())
@@ -157,6 +158,14 @@ class CadastrarUsuario(MDCard):
         self.ids.email.text = ''
         self.ids.senha.text = ''
         self.ids.re_senha.text = ''
+
+    def on_checkbox_active(self, checkbox, value):
+        if value:
+            self.admin = '1'
+            print('administrador = ',self.admin)
+        else:
+            self.admin = '0'
+            print('administrador = ',self.admin)
 
 class ListarUsuarios(MDCard):
     def on_enter(self):
