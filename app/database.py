@@ -15,22 +15,25 @@ class ConectaBanco:
         cursor = self.connection.cursor() # --- Gerando um cursor"
 
         # --- Criando a tabela "usuario"
-        cursor.execute("""CREATE TABLE IF NOT EXISTS usuario (
-            idUser INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL,
+        cursor.execute("""CREATE TABLE IF NOT EXISTS usuario2 (
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            usuario TEXT NOT NULL,
             email TEXT NOT NULL,
-            password TEXT NOT NULL)
+            password TEXT NOT NULL,
+            administrador VARCHAR(1) NOT NULL)
             """)
 
     def inserir_dados(self,dados):
-        campos = ('username','email','password')
-        itens = ('?,?,?')
+        campos = ('usuario','email','password','administrador')
+        itens = ('?,?,?,?')
+
+        print(dados)
         
         self.connect()
         
         try:
             cursor = self.connection.cursor()
-            cursor.execute(f"""INSERT INTO usuario {campos} VALUES ({itens}) """, dados)
+            cursor.execute(f"""INSERT INTO usuario2 {campos} VALUES ({itens}) """, dados)
             self.record_data()
             
         except Exception as e:
@@ -55,7 +58,7 @@ class ConectaBanco:
         self.connect()
         try:
             cursor = self.connection.cursor()
-            cursor.execute("SELECT * FROM usuario")
+            cursor.execute("SELECT * FROM usuario2")
             usuarios = cursor.fetchall()
         except:
             pass

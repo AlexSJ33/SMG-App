@@ -120,7 +120,7 @@ class CadastrarCliente(MDCard):
 
 class CadastrarUsuario(MDCard):
     dialog = None
-    admin = '0'   
+    adminstrador = '0'
     def get_usuario(self):
         usuario = self.ids.usuario.text
         usuario = "".join(usuario.split())
@@ -130,12 +130,16 @@ class CadastrarUsuario(MDCard):
         senha = "".join(senha.split())
         re_senha = self.ids.re_senha.text
         re_senha = "".join(re_senha.split())
-        data = (usuario,email,senha)
+        admin = self.adminstrador
+
+        data = (usuario,email,senha,admin)
+        print('get_usuario =',admin)
         
         if usuario == '' or email.strip() == '' or senha.strip() == '' or re_senha.strip() == '':
             self.dialog = MDDialog(
                 text="[color=#f9f9f9]Preencha todos os campos ![/color]",
                 md_bg_color='3c3c3c',
+                    
                 )
             self.dialog.open()
             
@@ -159,13 +163,13 @@ class CadastrarUsuario(MDCard):
         self.ids.senha.text = ''
         self.ids.re_senha.text = ''
 
-    def on_checkbox_active(self, checkbox, value):
+    def on_checkbox_active(self,checkbox, value):
         if value:
             self.admin = '1'
-            print('administrador = ',self.admin)
         else:
             self.admin = '0'
-            print('administrador = ',self.admin)
+        self.adminstrador = ''
+        self.adminstrador= self.admin
 
 class ListarUsuarios(MDCard):
     def on_enter(self):
