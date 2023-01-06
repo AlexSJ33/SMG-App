@@ -3,6 +3,7 @@ ScreenManager:
     Login:
     Menu:
     GestaoUsuario:
+    GestaoUsuario2:
     GestaoCliente:
 
 <Inicio>:
@@ -118,7 +119,7 @@ ScreenManager:
             md_bg_color: 'gray'
             on_release:
                 app.root.transition.direction = 'left'
-                app.root.current = 'gestao_usuario'  
+                app.root.current = 'gestao_usuario2'  
 
 <ElementCard@MDCard>:
     md_bg_color: 120/255, 173/255, 173/255, 1
@@ -147,6 +148,11 @@ ScreenManager:
         MDLabel:
             halign:"center"
             text:root.items_count
+
+<GestaoUsuario2>:
+    name: 'gestao_usuario2'
+
+    
 
 <GestaoUsuario>:
     name: 'gestao_usuario'
@@ -330,8 +336,7 @@ ScreenManager:
     ScrollView:
 
         MDList:
-            id: box
-                
+            id: box    
 
     MDIconButton:
         icon: "close-circle-outline"

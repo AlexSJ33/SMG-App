@@ -16,6 +16,11 @@ from kivymd.uix.list import OneLineListItem
 from kivymd.uix.dialog import MDDialog
 from database import ConectaBanco
 from kivy.core.window import Window
+
+from kivymd.uix.datatables import MDDataTable
+from kivy.metrics import dp
+
+
 Window.size = (350, 580)
 
 global tela
@@ -32,6 +37,44 @@ class Menu(Screen):
     def on_enter(self):
         name = autenticado[0]
         self.ids.label_menu.text = 'Olá ' + str(name)
+
+
+class GestaoUsuario2(Screen):
+    
+    def on_enter(self):
+
+        self.table = MDDataTable(
+            pos_hint={'center_x': 0.5, 'center_y': 0.5},
+            size_hint=(0.9, 0.6),
+            use_pagination=True,
+            background_color= (1,0,1,0),
+            background_color_header="#65275d",
+            
+            check=True,
+            # name column, width column, sorting function column(optional), custom tooltip
+            column_data=[
+                
+                ("ID", dp(30)),
+                ("Usuário", dp(30)),
+                ("E-mail", dp(30)),
+                ("Administrador", dp(30)),
+                
+            ],
+            row_data = [
+                ('1','Teste','teste@teste.com','1'),
+                ('2','Teste','teste@teste.com','0'),
+                ('3','Teste','teste@teste.com','1'),
+                ('4','Teste','teste@teste.com','0'),
+                ('5','Teste','teste@teste.com','1'),
+                ('6','Teste','teste@teste.com','1'),
+                ('7','Teste','teste@teste.com','0'),
+                ('8','Teste','teste@teste.com','0'),
+                ('9','Teste','teste@teste.com','0'),
+                ('10','Teste','teste@teste.com','0'),
+
+            ]
+        )
+        self.add_widget(self.table)
 
 class GestaoUsuario(Screen):
     def cad_usuario(self):
@@ -190,6 +233,7 @@ tela.add_widget(Menu(name='menu'))
 
 
 
+
 c=ConectaBanco()
 c.connect()
 c.create_table()
@@ -202,6 +246,8 @@ class MyApp(MDApp):
         tela = kv
         #self.theme_cls.primary_palette = 'Purple'
         #self.theme_cls.theme_style = 'Dark'
+
+
         return tela
 
 
