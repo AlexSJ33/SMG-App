@@ -151,6 +151,20 @@ ScreenManager:
 
 <GestaoUsuario2>:
     name: 'gestao_usuario2'
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: 20
+        MDTextField:
+            id: pesquisar
+            hint_text: "Pesquisar..."
+            on_text: root.filter_text(pesquisar.text)
+            
+            
+
+        ScrollView:
+            MDList:
+                id: box
+                divider: "Full"
 
     
 

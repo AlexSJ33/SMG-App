@@ -40,41 +40,32 @@ class Menu(Screen):
 
 
 class GestaoUsuario2(Screen):
-    
+
+
     def on_enter(self):
+        lista = c.listar_dados()
+        for users in lista:
+                    self.ids['box'].add_widget(
+                        OneLineListItem(
+                            text=f"{users[0]:>4} {users[1]}",
+                        )
+                    )
+                    
 
-        self.table = MDDataTable(
-            pos_hint={'center_x': 0.5, 'center_y': 0.5},
-            size_hint=(0.9, 0.6),
-            use_pagination=True,
-            background_color= (1,0,1,0),
-            background_color_header="#65275d",
-            
-            check=True,
-            # name column, width column, sorting function column(optional), custom tooltip
-            column_data=[
-                
-                ("ID", dp(30)),
-                ("Usuário", dp(30)),
-                ("E-mail", dp(30)),
-                ("Administrador", dp(30)),
-                
-            ],
-            row_data = [
-                ('1','Teste','teste@teste.com','1'),
-                ('2','Teste','teste@teste.com','0'),
-                ('3','Teste','teste@teste.com','1'),
-                ('4','Teste','teste@teste.com','0'),
-                ('5','Teste','teste@teste.com','1'),
-                ('6','Teste','teste@teste.com','1'),
-                ('7','Teste','teste@teste.com','0'),
-                ('8','Teste','teste@teste.com','0'),
-                ('9','Teste','teste@teste.com','0'),
-                ('10','Teste','teste@teste.com','0'),
+    def filter_text(self,texto):
+        TempList_filter = []
+        lista = c.listar_dados()
 
-            ]
-        )
-        self.add_widget(self.table)
+        if len(self.ids.box.children) > 0:
+            self.ids.box.clear_widgets()
+            for item in lista:
+                if texto in item['text']:
+                    TempList_filter.append(item)
+            self.on_enter(TempList_filter)
+        else:
+            self.filter_text(lista)
+
+
 
 class GestaoUsuario(Screen):
     def cad_usuario(self):
@@ -164,6 +155,7 @@ class CadastrarCliente(MDCard):
 class CadastrarUsuario(MDCard):
     dialog = None
     adminstrador = '0'
+
     def get_usuario(self):
         usuario = self.ids.usuario.text
         usuario = "".join(usuario.split())
