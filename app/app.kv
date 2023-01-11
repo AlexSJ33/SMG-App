@@ -173,64 +173,64 @@ ScreenManager:
             opposite_colors: True
             elevation_normal: 8
             pos_hint:{'center_x': 0.95, 'center_y': 0.5}
-            #on_release: root.plus_button_pressed()
+            on_release: root.cad_usuario()
         
-<GestaoUsuario>:
-    name: 'gestao_usuario'
-    MDFloatLayout:
-        md_bg_color:"#696969"
-        MDLabel:
-            text: "Gestão de Usuário"
-            font_size: "28sp"
-            halign: 'center'
-            pos_hint: {"center_x": .5, "center_y": .85}
+# <GestaoUsuario>:
+#     name: 'gestao_usuario'
+#     MDFloatLayout:
+#         md_bg_color:"#696969"
+#         MDLabel:
+#             text: "Gestão de Usuário"
+#             font_size: "28sp"
+#             halign: 'center'
+#             pos_hint: {"center_x": .5, "center_y": .85}
 
-        MDFillRoundFlatButton:
-            text: "Cadastrar Usuário"
-            font_size: "18sp"
-            halign: 'center'
-            size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .60}
-            on_press:
-                root.cad_usuario()
+#         MDFillRoundFlatButton:
+#             text: "Cadastrar Usuário"
+#             font_size: "18sp"
+#             halign: 'center'
+#             size_hint_x: .80
+#             pos_hint: {"center_x": .5, "center_y": .60}
+#             on_press:
+#                 root.cad_usuario()
 
-        MDFillRoundFlatButton:
-            text: "Editar Usuário"
-            font_size: "18sp"
-            halign: 'center'
-            size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .50}
+#         MDFillRoundFlatButton:
+#             text: "Editar Usuário"
+#             font_size: "18sp"
+#             halign: 'center'
+#             size_hint_x: .80
+#             pos_hint: {"center_x": .5, "center_y": .50}
 
-        MDFillRoundFlatButton:
-            text: "Deletar Usuário"
-            font_size: "18sp"
-            halign: 'center'
-            size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .40}
+#         MDFillRoundFlatButton:
+#             text: "Deletar Usuário"
+#             font_size: "18sp"
+#             halign: 'center'
+#             size_hint_x: .80
+#             pos_hint: {"center_x": .5, "center_y": .40}
 
-        MDFillRoundFlatButton:
-            text: "Exibir Usuário"
-            font_size: "18sp"
-            halign: 'center'
-            size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .30}
+#         MDFillRoundFlatButton:
+#             text: "Exibir Usuário"
+#             font_size: "18sp"
+#             halign: 'center'
+#             size_hint_x: .80
+#             pos_hint: {"center_x": .5, "center_y": .30}
 
-        MDFillRoundFlatButton:
-            text: "Listar Usuários"
-            font_size: "18sp"
-            halign: 'center'
-            size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .20}
-            on_press: root.exibir_dados()
+#         MDFillRoundFlatButton:
+#             text: "Listar Usuários"
+#             font_size: "18sp"
+#             halign: 'center'
+#             size_hint_x: .80
+#             pos_hint: {"center_x": .5, "center_y": .20}
+#             on_press: root.exibir_dados()
           
-        MDIconButton:
-            icon: "arrow-left-circle"
-            icon_size: "32sp"
+#         MDIconButton:
+#             icon: "arrow-left-circle"
+#             icon_size: "32sp"
             
-            pos_hint: {"center_x": .5, "center_y": .10}
-            on_release:
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'menu'
+#             pos_hint: {"center_x": .5, "center_y": .10}
+#             on_release:
+#                 root.manager.transition.direction = 'right'
+#                 root.manager.current = 'menu'
 
 <CadastrarUsuario>:
     orientation: "vertical"

@@ -46,8 +46,8 @@ class GestaoUsuario2(Screen):
     def loadItems(self, lst):
         
         for users in lst:
-            it = OneLineAvatarIconListItem(
-                text=f"{users['id']:<6} {users['user']:^15} {users['admin']:>20}",
+            it = OneLineListItem(
+                text=f"{users['id']:<10} {users['user']:<15} {users['admin']:>20}",
             )
             it.add_widget(MDIcon(
                 icon= "account-edit-outline",
@@ -58,12 +58,6 @@ class GestaoUsuario2(Screen):
                 )
             )
             self.ids['box'].add_widget(it)
-
-            # self.ids['box'].add_widget(
-            #     OneLineListItem(
-            #     text=f"{users['id']:<10} {users['user']:^20} {users['admin']:>25}",
-            #     )
-            # )
 
 
     def filter_text(self,texto):
@@ -81,14 +75,18 @@ class GestaoUsuario2(Screen):
         else:
             self.filter_text(ListItems)
 
+    def cad_usuario(self):
+        self.add_widget(CadastrarUsuario())
+        
+
 
 
 class GestaoUsuario(Screen):
     def cad_usuario(self):
         self.add_widget(CadastrarUsuario())
     
-    def exibir_dados(self):
-        self.add_widget(ListarUsuarios())           
+    # def exibir_dados(self):
+    #     self.add_widget(ListarUsuarios())           
     
 
 class GestaoCliente(Screen):
@@ -222,18 +220,18 @@ class CadastrarUsuario(MDCard):
         self.adminstrador = ''
         self.adminstrador= self.admin
 
-class ListarUsuarios(MDCard):
-    def on_enter(self):
-        lista = c.listar_dados()
-        for users in lista:
-                    self.ids['box'].add_widget(
-                        OneLineListItem(
-                            text=f"{users[0]:>4} {users[1]}",
-                        )
-                    )
+# class ListarUsuarios(MDCard):
+#     def on_enter(self):
+#         lista = c.listar_dados()
+#         for users in lista:
+#                     self.ids['box'].add_widget(
+#                         OneLineListItem(
+#                             text=f"{users[0]:>4} {users[1]}",
+#                         )
+#                     )
     
-    def fechar(self):
-        self.parent.remove_widget(self)  
+#     def fechar(self):
+#         self.parent.remove_widget(self)  
 
 tela.add_widget(Inicio(name='inicio'))
 tela.add_widget(Login(name='login'))
