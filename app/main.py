@@ -14,12 +14,11 @@ from kivy.uix.screenmanager import Screen,ScreenManager
 from kivymd.uix.card import MDCard
 from kivymd.uix.list import OneLineListItem
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.list import OneLineAvatarIconListItem
+from kivymd.uix.label import MDIcon
 from database import ConectaBanco
+from database import data as ListItems
 from kivy.core.window import Window
-
-from kivymd.uix.datatables import MDDataTable
-from kivy.metrics import dp
-
 
 Window.size = (350, 580)
 
@@ -41,29 +40,46 @@ class Menu(Screen):
 
 class GestaoUsuario2(Screen):
 
-
     def on_enter(self):
-        lista = c.listar_dados()
-        for users in lista:
-                    self.ids['box'].add_widget(
-                        OneLineListItem(
-                            text=f"{users[0]:>4} {users[1]}",
-                        )
-                    )
-                    
+        self.loadItems(ListItems)
+
+    def loadItems(self, lst):
+        
+        for users in lst:
+            it = OneLineAvatarIconListItem(
+                text=f"{users['id']:<6} {users['user']:^15} {users['admin']:>20}",
+            )
+            it.add_widget(MDIcon(
+                icon= "account-edit-outline",
+                size_hint=(None,None),
+                size=(25,25),
+                pos_hint={'center_x': 0.95, 'center_y': 0.5}
+
+                )
+            )
+            self.ids['box'].add_widget(it)
+
+            # self.ids['box'].add_widget(
+            #     OneLineListItem(
+            #     text=f"{users['id']:<10} {users['user']:^20} {users['admin']:>25}",
+            #     )
+            # )
+
 
     def filter_text(self,texto):
         TempList_filter = []
-        lista = c.listar_dados()
 
         if len(self.ids.box.children) > 0:
             self.ids.box.clear_widgets()
-            for item in lista:
-                if texto in item['text']:
+            for item in ListItems:
+                if texto.lower() in item['user'].lower():
                     TempList_filter.append(item)
-            self.on_enter(TempList_filter)
+            self.loadItems(TempList_filter)
+        elif len(self.ids.box.children) != ListItems:
+            
+            self.on_enter()
         else:
-            self.filter_text(lista)
+            self.filter_text(ListItems)
 
 
 
@@ -100,13 +116,13 @@ class Login(Screen):
             return self.username,self.password
 
     def valida_login(self):
-        lista = c.listar_dados()
-        for users in lista:
+        
+        for users in ListItems:
 
             if self.username == '' or self.password == '':
                 self.ids.label_login.text = ' '
 
-            elif self.username == users[1] and self.password == users[3]:
+            elif self.username == users['user'] and self.password == users['password']:
                 print(self.username)
                 self.ids.label_login.text = 'Login Accept !!'
                 self.ids.label_login.text_color= 'green'

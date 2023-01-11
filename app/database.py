@@ -1,5 +1,7 @@
 import sqlite3
 
+data = []
+
 class ConectaBanco:
     
     
@@ -54,15 +56,21 @@ class ConectaBanco:
             pass
     
     def listar_dados(self,usuarios=''):
-        
         self.connect()
+
         try:
             cursor = self.connection.cursor()
             cursor.execute("SELECT * FROM usuario2")
             usuarios = cursor.fetchall()
+
+            for users in usuarios:
+                ListaItens={'id':users[0], 'user':users[1],'password':users[3],'admin':users[4]}
+                data.append(ListaItens)
+            
         except:
             pass
-        
-        return usuarios
+            return usuarios
+    
+
   
         

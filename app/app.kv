@@ -151,6 +151,7 @@ ScreenManager:
 
 <GestaoUsuario2>:
     name: 'gestao_usuario2'
+
     MDBoxLayout:
         orientation: "vertical"
         padding: 20
@@ -158,16 +159,22 @@ ScreenManager:
             id: pesquisar
             hint_text: "Pesquisar..."
             on_text: root.filter_text(pesquisar.text)
-            
-            
+
 
         ScrollView:
             MDList:
                 id: box
                 divider: "Full"
 
-    
-
+        MDFloatingActionButton:
+            icon: 'plus'
+            size_hint: None, None
+            size: dp(48), dp(48)
+            opposite_colors: True
+            elevation_normal: 8
+            pos_hint:{'center_x': 0.95, 'center_y': 0.5}
+            #on_release: root.plus_button_pressed()
+        
 <GestaoUsuario>:
     name: 'gestao_usuario'
     MDFloatLayout:
