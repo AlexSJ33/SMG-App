@@ -14,7 +14,7 @@ from kivy.uix.screenmanager import Screen,ScreenManager
 from kivymd.uix.card import MDCard
 from kivymd.uix.list import OneLineListItem
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.list import OneLineAvatarIconListItem
+
 from kivymd.uix.label import MDIcon
 from database import ConectaBanco
 from database import data as ListItems
@@ -77,16 +77,7 @@ class GestaoUsuario2(Screen):
 
     def cad_usuario(self):
         self.add_widget(CadastrarUsuario())
-        
-
-
-
-class GestaoUsuario(Screen):
-    def cad_usuario(self):
-        self.add_widget(CadastrarUsuario())
-    
-    # def exibir_dados(self):
-    #     self.add_widget(ListarUsuarios())           
+           
     
 
 class GestaoCliente(Screen):
