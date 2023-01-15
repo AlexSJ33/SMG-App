@@ -20,6 +20,7 @@ from database import ConectaBanco
 from database import data as ListItems
 from kivy.core.window import Window
 
+
 Window.size = (350, 580)
 
 global tela
@@ -44,9 +45,11 @@ class GestaoUsuario2(Screen):
         self.loadItems(ListItems)
 
     def loadItems(self, lst):
+
         
         for users in lst:
             it = OneLineListItem(
+                
                 text=f"{users['id']:<10} {users['user']:<15} {users['admin']:>20}",
             )
             it.add_widget(MDIcon(
