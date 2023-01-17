@@ -16,12 +16,13 @@ from kivymd.uix.list import OneLineListItem
 from kivymd.uix.dialog import MDDialog
 
 from kivymd.uix.label import MDIcon
+from kivymd.uix.button import MDRectangleFlatButton
 from database import ConectaBanco
 from database import data as ListItems
 from kivy.core.window import Window
 
 
-Window.size = (350, 580)
+Window.size = (380, 600)
 
 global tela
 global autenticado
@@ -56,10 +57,29 @@ class GestaoUsuario2(Screen):
                 icon= "account-edit-outline",
                 size_hint=(None,None),
                 size=(25,25),
-                pos_hint={'center_x': 0.95, 'center_y': 0.5}
-
-                )
+                pos_hint={'center_x': 0.95, 'center_y': 0.5},
+                                )
             )
+            it.add_widget(MDRectangleFlatButton(    
+                text= 'EDITAR',
+                text_color= [0, 0, 1, 1],
+                md_bg_color= [1, 1, 0, 1],
+                size_hint=(None,None),
+                size=(25,25),
+                pos_hint={'center_x': 0.95, 'center_y': 0.6}
+            )
+        )
+
+            it.add_widget(MDRectangleFlatButton(    
+                text= 'EXCLUIR',
+                text_color= [0, 0, 1, 1],
+                md_bg_color= [1, 1, 0, 1],
+                size_hint=(None,None),
+                size=(25,25),
+                pos_hint={'center_x': 0.85, 'center_y': 0.6}
+            )
+        )        
+
             self.ids['box'].add_widget(it)
 
 
