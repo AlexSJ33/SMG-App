@@ -59,7 +59,7 @@ class GestaoUsuario2(Screen):
                 ("Perfil", dp(30)),
             ],
             row_data=[
-                lst
+                (f"{i + 1}", "1", "2", "3", "4", "5") for i in range(50)
                 ]
 
             )

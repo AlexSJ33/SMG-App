@@ -160,12 +160,12 @@ ScreenManager:
             pos_hint: {'center_x':.5, 'center_y':.95}
             on_text: root.filter_text(pesquisar.text)
 
-        # ScrollView:
-        #     pos_hint: {'center_x':.5, 'center_y':.32}
-        #     MDList:
-        #         id: box
-        #         #divider: "Full"
-        #         #pos_hint: {'center_x':.5, 'center_y':.95}
+        ScrollView:
+            pos_hint: {'center_x':.5, 'center_y':.32}
+            MDList:
+                id: box
+                #divider: "Full"
+                #pos_hint: {'center_x':.5, 'center_y':.95}
 
         MDFloatingActionButton:
             icon: 'plus'
