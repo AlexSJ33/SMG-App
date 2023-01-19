@@ -51,38 +51,38 @@ class GestaoUsuario2(Screen):
 
     def loadItems(self):
         lst = ListItems
+        
         dados = []
         for x in lst:
-            dados.append(x)
+            dados.append(x['id'])
+            dados.append(x['user'])
         
         print(dados)
-        print(type)
+        print(type(dados))
 
-        self.data_tables = MDDataTable(
-            size_hint=(0.9, 0.6),
-            pos_hint={'center_x':.5, 'center_y':.5},
-            use_pagination=True,
-            check=True,
+        # self.data_tables = MDDataTable(
+        #     size_hint=(0.9, 0.6),
+        #     pos_hint={'center_x':.5, 'center_y':.5},
+        #     use_pagination=True,
+        #     check=True,
             
-            column_data=[
-                ("ID", dp(30)),
-                ("Nome", dp(30)),
-                ("Perfil", dp(30))
+        #     column_data=[
+        #         ("ID", dp(30)),
+        #         ("Nome", dp(30)),
+        #         ("Perfil", dp(30))
             
-            ],
+        #     ],
             
-            row_data=[
-                (
-                i[0],
-                i[1],
-                i[2],
+        #     row_data=[
+        #         (
+        #         dados[:][0]
 
-                )
-                for i in ListItems
-                ],
-            )
+        #         )
+        #         for i in dados
+        #         ],
+        #     )
 
-        self.add_widget(self.data_tables)
+        # self.add_widget(self.data_tables)
    
 
         #     it.add_widget(MDIcon(
