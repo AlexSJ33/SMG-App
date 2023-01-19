@@ -32,6 +32,8 @@ tela = ScreenManager()
 autenticado = []
 
 
+
+
 class Inicio(Screen):
     pass
 
@@ -45,25 +47,41 @@ class Menu(Screen):
 class GestaoUsuario2(Screen):
 
     def on_enter(self):
-        self.loadItems(ListItems)
+        self.loadItems()
 
-    def loadItems(self,lst):  
+    def loadItems(self):
+        lst = ListItems
+        dados = []
+        for x in lst:
+            dados.append(x)
+        
+        print(dados)
+        print(type)
 
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
             pos_hint={'center_x':.5, 'center_y':.5},
-            # name column, width column
+            use_pagination=True,
+            check=True,
+            
             column_data=[
                 ("ID", dp(30)),
                 ("Nome", dp(30)),
-                ("Perfil", dp(30)),
+                ("Perfil", dp(30))
+            
             ],
+            
             row_data=[
-                (f"{i + 1}", "1", "2", "3", "4", "5") for i in range(50)
-                ]
+                (
+                i[0],
+                i[1],
+                i[2],
 
+                )
+                for i in ListItems
+                ],
             )
-        
+
         self.add_widget(self.data_tables)
    
 
