@@ -139,7 +139,7 @@ ScreenManager:
         MDLabel:
             halign:"center"
             text:root.text
-            font_size: "15sp" 
+            font_size: "15sp"
         MDLabel:
             halign:"center"
             font_style:"Caption"
@@ -154,18 +154,6 @@ ScreenManager:
     MDFloatLayout:
         orientation: "vertical"
         padding: 20
-        MDTextField:
-            id: pesquisar
-            hint_text: "Pesquisar..."
-            pos_hint: {'center_x':.5, 'center_y':.95}
-            on_text: root.filter_text(pesquisar.text)
-
-        ScrollView:
-            pos_hint: {'center_x':.5, 'center_y':.32}
-            MDList:
-                id: box
-                #divider: "Full"
-                #pos_hint: {'center_x':.5, 'center_y':.95}
 
         MDFloatingActionButton:
             icon: 'plus'
@@ -175,14 +163,13 @@ ScreenManager:
             elevation_normal: 8
             pos_hint:{'center_x': 0.90, 'center_y': 0.10}
             on_release: root.cad_usuario()
-        
 
 <CadastrarUsuario>:
     orientation: "vertical"
     padding: "0dp"
     size_hint: .9, .9
     pos_hint: {"center_x": .5, "center_y": .5}
-    
+
     MDFloatLayout:
         orientation: "vertical"
         md_bg_color:'azure'

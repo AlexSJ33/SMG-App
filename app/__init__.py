@@ -13,15 +13,12 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen,ScreenManager
 from kivymd.uix.card import MDCard
 from kivymd.uix.dialog import MDDialog
-
-from kivymd.uix.label import MDIcon
-from kivymd.uix.button import MDRectangleFlatButton
-from database import ConectaBanco
-from database import data as ListItems
 from kivy.core.window import Window
-
 from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
+
+from database import ConectaBanco
+from database import data as ListItems
 
 
 Window.size = (380, 600)
@@ -30,8 +27,6 @@ global tela
 global autenticado
 tela = ScreenManager()
 autenticado = []
-
-
 
 
 class Inicio(Screen):
@@ -50,82 +45,29 @@ class GestaoUsuario2(Screen):
         self.loadItems()
 
     def loadItems(self):
-        lst = ListItems
-        
-        dados = []
-        for x in lst:
-            dados.append(x['id'])
-            dados.append(x['user'])
-        
-        print(dados)
-        print(type(dados))
-
-        # self.data_tables = MDDataTable(
-        #     size_hint=(0.9, 0.6),
-        #     pos_hint={'center_x':.5, 'center_y':.5},
-        #     use_pagination=True,
-        #     check=True,
+        self.data_tables = MDDataTable(
+            size_hint=(0.9, 0.6),
+            pos_hint={'center_x':.5, 'center_y':.5},
+            use_pagination=True,
+            check=True,
             
-        #     column_data=[
-        #         ("ID", dp(30)),
-        #         ("Nome", dp(30)),
-        #         ("Perfil", dp(30))
+            column_data=[
+                ("ID", dp(30)),
+                ("Nome", dp(30)),
+                ("Perfil", dp(30))
             
-        #     ],
-            
-        #     row_data=[
-        #         (
-        #         dados[:][0]
+            ],
+            row_data=[
+                (
+                i[:][0],
+                i[:][1],
+                i[:][3],
+                )
+                for i in ListItems
+                ],
+            )
 
-        #         )
-        #         for i in dados
-        #         ],
-        #     )
-
-        # self.add_widget(self.data_tables)
-   
-
-        #     it.add_widget(MDIcon(
-        #         icon= "account-edit-outline",
-        #         size_hint=(None,None),
-        #         size=(25,25),
-        #         pos_hint={'center_x': 0.95, 'center_y': 0.5},
-        #                         )
-        #     )
-        #     it.add_widget(MDRectangleFlatButton(    
-        #         text= 'EDITAR',
-        #         text_color= [0, 0, 1, 1],
-        #         md_bg_color= [1, 1, 0, 1],
-        #         size_hint=(None,None),
-        #         size=(25,25),
-        #         pos_hint={'center_x': 0.95, 'center_y': 0.6}
-        #     )
-        # )
-
-        #     it.add_widget(MDRectangleFlatButton(    
-        #         text= 'EXCLUIR',
-        #         text_color= [0, 0, 1, 1],
-        #         md_bg_color= [1, 1, 0, 1],
-        #         size_hint=(None,None),
-        #         size=(25,25),
-        #         pos_hint={'center_x': 0.85, 'center_y': 0.6}
-        #     )
-        # ) 
-
-    def filter_text(self,texto):
-        TempList_filter = []
-
-        if len(self.ids.box.children) > 0:
-            self.ids.box.clear_widgets()
-            for item in ListItems:
-                if texto.lower() in item['user'].lower():
-                    TempList_filter.append(item)
-            self.loadItems(TempList_filter)
-        elif len(self.ids.box.children) != ListItems:
-            
-            self.on_enter()
-        else:
-            self.filter_text(ListItems)
+        self.add_widget(self.data_tables)
 
     def cad_usuario(self):
         self.add_widget(CadastrarUsuario())
@@ -163,7 +105,7 @@ class Login(Screen):
             if self.username == '' or self.password == '':
                 self.ids.label_login.text = ' '
 
-            elif self.username == users['user'] and self.password == users['password']:
+            elif self.username == users[1] and self.password == users[2]:
                 print(self.username)
                 self.ids.label_login.text = 'Login Accept !!'
                 self.ids.label_login.text_color= 'green'
@@ -262,19 +204,6 @@ class CadastrarUsuario(MDCard):
             self.admin = '0'
         self.adminstrador = ''
         self.adminstrador= self.admin
-
-# class ListarUsuarios(MDCard):
-#     def on_enter(self):
-#         lista = c.listar_dados()
-#         for users in lista:
-#                     self.ids['box'].add_widget(
-#                         OneLineListItem(
-#                             text=f"{users[0]:>4} {users[1]}",
-#                         )
-#                     )
-    
-#     def fechar(self):
-#         self.parent.remove_widget(self)  
 
 tela.add_widget(Inicio(name='inicio'))
 tela.add_widget(Login(name='login'))
