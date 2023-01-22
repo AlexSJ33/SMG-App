@@ -39,7 +39,7 @@ class Menu(Screen):
         self.ids.label_menu.text = 'Olá ' + str(name)
 
 
-class GestaoUsuario2(Screen):
+class GestaoUsuario(Screen):
 
     def on_enter(self):
         self.loadItems()
