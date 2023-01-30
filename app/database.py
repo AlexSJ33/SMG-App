@@ -64,7 +64,7 @@ class ConectaBanco:
             usuarios = cursor.fetchall()
 
             for users in usuarios:
-                ListaItens=(users[0],users[1],users[3],users[4])
+                ListaItens=(users[0],users[1],users[2],users[3],users[4])
                 #ListaItens={'id':users[0], 'user':users[1],'password':users[3],'admin':users[4]}
                 data.append(ListaItens)
             print(data)

@@ -53,7 +53,8 @@ class GestaoUsuario(Screen):
             
             column_data=[
                 ("ID", dp(30)),
-                ("Nome", dp(30)),
+                ("Username", dp(30)),
+                ("E-mail", dp(30)),
                 ("Perfil", dp(30))
             
             ],
@@ -61,6 +62,7 @@ class GestaoUsuario(Screen):
                 (
                 i[:][0],
                 i[:][1],
+                i[:][2],
                 i[:][3],
                 )
                 for i in ListItems
@@ -105,7 +107,7 @@ class Login(Screen):
             if self.username == '' or self.password == '':
                 self.ids.label_login.text = ' '
 
-            elif self.username == users[1] and self.password == users[2]:
+            elif self.username == users[1] and self.password == users[3]:
                 print(self.username)
                 self.ids.label_login.text = 'Login Accept !!'
                 self.ids.label_login.text_color= 'green'
