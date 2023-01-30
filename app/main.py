@@ -21,7 +21,7 @@ from database import ConectaBanco
 from database import data as ListItems
 
 
-Window.size = (380, 600)
+Window.size = (680, 600)
 
 global tela
 global autenticado
@@ -45,6 +45,7 @@ class GestaoUsuario(Screen):
         self.loadItems()
 
     def loadItems(self):
+        
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
             pos_hint={'center_x':.5, 'center_y':.5},
@@ -63,7 +64,7 @@ class GestaoUsuario(Screen):
                 i[:][0],
                 i[:][1],
                 i[:][2],
-                i[:][3],
+                i[:][4],
                 )
                 for i in ListItems
                 ],

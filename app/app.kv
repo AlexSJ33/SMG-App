@@ -151,15 +151,18 @@ ScreenManager:
 
 <GestaoUsuario>:
     name: 'gestao_usuario'
+    
 
     MDFloatLayout:
         orientation: "vertical"
         padding: 20
+        md_bg_color: app.theme_cls.primary_light
+        
 
         MDIconButton:
-            icon: "arrow-left-circle"
+            icon: "arrow-left-bold-outline"
             user_font_size: "98sp"
-            pos_hint: {'center_x': .1, 'center_y': .96}
+            pos_hint: {'center_x': .1, 'center_y': .94}
             on_press:
                 app.root.current = 'menu'
                 app.root.transition.direction = 'right'
