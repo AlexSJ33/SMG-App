@@ -17,6 +17,7 @@ from kivy.core.window import Window
 from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
 
+
 from database import ConectaBanco
 from database import data as ListItems
 
@@ -74,8 +75,8 @@ class GestaoUsuario(Screen):
 
     def cad_usuario(self):
         self.add_widget(CadastrarUsuario())
-           
     
+   
 
 class GestaoCliente(Screen):
     def cad_cliente(self):
