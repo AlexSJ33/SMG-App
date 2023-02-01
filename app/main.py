@@ -8,6 +8,9 @@
 # Data...........: 04.12.2022
 #---------------------------------------------------------#
 
+from gestaocliente import GestaoCliente as gc
+from gestaousuario import GestaoUsuario as gu
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen,ScreenManager
@@ -53,8 +56,6 @@ class GestaoUsuario(Screen):
             use_pagination=True,
             check=True,
             rows_num=10,
-            
-            
             column_data=[
                 ("ID", dp(30)),
                 ("Username", dp(30)),
@@ -234,6 +235,7 @@ c.create_table()
 c.listar_dados()
 
 class MyApp(MDApp):
+    
 
     def build(self):
         kv = Builder.load_file('app.kv')
@@ -241,6 +243,7 @@ class MyApp(MDApp):
         #self.theme_cls.primary_palette = 'Purple'
         #self.theme_cls.theme_style = 'Dark'
 
+        
 
         return tela
 
