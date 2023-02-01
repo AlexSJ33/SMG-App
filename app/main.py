@@ -52,6 +52,8 @@ class GestaoUsuario(Screen):
             pos_hint={'center_x':.5, 'center_y':.5},
             use_pagination=True,
             check=True,
+            rows_num=10,
+            
             
             column_data=[
                 ("ID", dp(30)),
@@ -70,8 +72,17 @@ class GestaoUsuario(Screen):
                 for i in ListItems
                 ],
             )
+        self.data_tables.bind(on_row_press=self.on_row_press)
+        self.data_tables.bind(on_check_press=self.on_check_press)
 
         self.add_widget(self.data_tables)
+
+    def on_row_press(self, instance_table, instance_row):
+        print(instance_table, instance_row)
+        pass
+
+    def on_check_press(self, instance_table, current_row):
+        print(current_row)
 
     def cad_usuario(self):
         self.add_widget(CadastrarUsuario())
@@ -156,6 +167,7 @@ class CadastrarCliente(MDCard):
         self.parent.remove_widget(self)   
 
 class CadastrarUsuario(MDCard):
+
     dialog = None
     adminstrador = '0'
 
@@ -186,7 +198,7 @@ class CadastrarUsuario(MDCard):
                 text="[color=#f9f9f9]Dados gravados com sucesso![/color]",
                 md_bg_color='3c3c3c',
                 )
-        
+    
             self.dialog.open()
             
             
