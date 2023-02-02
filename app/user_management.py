@@ -7,9 +7,9 @@ from kivy.metrics import dp
 from database import data as ListItems
 from database import ConectaBanco
 
-tela = ScreenManager()
 
-class GestaoUsuario(Screen):
+
+class UserManagement(Screen):
 
     def on_enter(self):
         self.loadItems()
@@ -52,9 +52,9 @@ class GestaoUsuario(Screen):
         print(current_row)
 
     def cad_usuario(self):
-        self.add_widget(CadastrarUsuario())
+        self.add_widget(RegisterUser())
 
-class CadastrarUsuario(MDCard):
+class RegisterUser(MDCard):
 
     dialog = None
     adminstrador = '0'

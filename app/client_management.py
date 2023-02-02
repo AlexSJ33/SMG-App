@@ -4,12 +4,12 @@ from kivymd.uix.card import MDCard
 
 
 
-class GestaoCliente(Screen):
+class ClientManagement(Screen):
     def cad_cliente(self):
-        self.add_widget(CadastrarCliente())
+        self.add_widget(RegisterClient())
 
 
-class CadastrarCliente(MDCard):
+class RegisterClient(MDCard):
     def get_cliente(self):
         nome = self.ids.nome.text
         cpf = self.ids.cpf.text

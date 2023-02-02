@@ -2,8 +2,8 @@ ScreenManager:
     Inicio:
     Login:
     Menu:
-    GestaoUsuario:
-    GestaoCliente:
+    UserManagement:
+    ClientManagement:
 
 <Inicio>:
     name: 'inicio'
@@ -149,7 +149,7 @@ ScreenManager:
             halign:"center"
             text:root.items_count
 
-<GestaoUsuario>:
+<UserManagement>:
     name: 'gestao_usuario'
     
 
@@ -159,13 +159,29 @@ ScreenManager:
         md_bg_color: app.theme_cls.primary_light
         
 
+
+
+    #==== Listas os Usuarios ===#
+        MDTopAppBar:
+            elevation: 1
+            md_bg_color: 'green'
+            pos_hint: {'center_x': .5, 'center_y': .98}
+
+            MDLabel:
+                text: 'LISTA DE USUÁRIOS'
+                color: 'white'
+                halign: 'center'
+                pos_hint: {"center_x": .5, "center_y": .5}
         MDIconButton:
-            icon: "arrow-left-bold-outline"
-            user_font_size: "98sp"
-            pos_hint: {'center_x': .1, 'center_y': .94}
+            icon: "home-circle"
+            user_font_size: "68sp"
+            pos_hint: {'center_x': .1, 'center_y': .96}
             on_press:
                 app.root.current = 'menu'
                 app.root.transition.direction = 'right'
+
+
+
 
         MDFloatingActionButton:
             icon: 'plus'
@@ -177,7 +193,7 @@ ScreenManager:
             on_release: root.cad_usuario()
 
 
-<CadastrarUsuario>:
+<RegisterUser>:
     orientation: "vertical"
     padding: "0dp"
     size_hint: .9, .9
@@ -286,8 +302,6 @@ ScreenManager:
     pos_hint: {"center_x": .5, "center_y": .5}
     md_bg_color: 'azure'
 
-
-
     MDTopAppBar:
         elevation: 1
         md_bg_color: 'green'
@@ -301,10 +315,6 @@ ScreenManager:
             pos_hint: {"center_x": .5, "center_y": .5}
 
 
-    ScrollView:
-
-        MDList:
-            id: box    
 
     MDIconButton:
         icon: "close-circle-outline"
@@ -317,7 +327,7 @@ ScreenManager:
 
 
 
-<GestaoCliente>:
+<ClientManagement>:
     name: 'gestao_cliente'
     MDFloatLayout:
         md_bg_color:"#696969"
@@ -378,7 +388,7 @@ ScreenManager:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
     
-<CadastrarCliente>:
+<RegisterClient>:
     id: cadastro
     orientation: "vertical"
     padding: "0dp"
