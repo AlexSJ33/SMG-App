@@ -39,19 +39,30 @@ class UserManagement(Screen):
                 for i in ListItems
                 ],
             )
-        self.data_tables.bind(on_row_press=self.on_row_press)
-        self.data_tables.bind(on_check_press=self.on_check_press)
+        #self.data_tables.bind(on_row_press=self.on_row_press)
+        #elf.data_tables.bind(on_check_press=self.on_check_press)
+        
 
         self.add_widget(self.data_tables)
+        
+        self.selected_index = None
+        self.data_tables.bind(on_check_press=self.on_check_press)
+        
 
-    def on_row_press(self, instance_table, instance_row):
-        print(instance_table, instance_row)
-        pass
-
+        
     def on_check_press(self, instance_table, current_row):
-        print(current_row)
+
+        if self.selected_index is not None:
+            self.selected_index = False
+            print('nada selecionado')
+        else:
+            
+            self.selected_index is True
+            print("Item selecionado:", current_row)
+
 
     def cad_usuario(self):
+
         self.add_widget(RegisterUser())
 
 class RegisterUser(MDCard):
