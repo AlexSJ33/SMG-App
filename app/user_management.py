@@ -50,16 +50,20 @@ class UserManagement(Screen):
         
 
         
-    def on_check_press(self, instance_table, current_row):
-
-        if self.selected_index is not None:
-            self.selected_index = False
+    def on_check_press(self, instance_table, current_row, is_selected=False):
+        if is_selected:
+            
+            instance_table.data[current_row]["selected"] = False
+            #print("Item selecionado:", current_row)
+            instance_table.selected_index = None
             print('nada selecionado')
         else:
-            
-            self.selected_index is True
-            print("Item selecionado:", current_row)
-
+            if instance_table.selected_index is not None:
+                instance_table.data[instance_table.selected_index]["selected"]=False
+            instance_table.selected_index = current_row
+            instance_table.data[current_row]["Selected"] = True
+            print('Item selecionado', instance_table.data[current_row])
+        
 
     def cad_usuario(self):
 
