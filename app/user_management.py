@@ -15,6 +15,7 @@ class UserManagement(Screen):
         self.loadItems()
 
     def loadItems(self):
+        self.selected_index = None
         
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
@@ -39,30 +40,26 @@ class UserManagement(Screen):
                 for i in ListItems
                 ],
             )
-        #self.data_tables.bind(on_row_press=self.on_row_press)
-        #elf.data_tables.bind(on_check_press=self.on_check_press)
+
+        self.add_widget(self.data_tables) 
         
 
-        self.add_widget(self.data_tables)
-        
-        self.selected_index = None
+
+        self.data_tables.selected_index = None
+        self.selected_current_row = []
+
         self.data_tables.bind(on_check_press=self.on_check_press)
         
 
-        
-    def on_check_press(self, instance_table, current_row, is_selected=False):
-        if is_selected:
-            
-            instance_table.data[current_row]["selected"] = False
-            #print("Item selecionado:", current_row)
-            instance_table.selected_index = None
-            print('nada selecionado')
+    def on_check_press(self, instance_table, current_row):
+        if current_row[0] in self.selected_current_row:
+            self.selected_current_row.remove(current_row[0])
+            print('Nenhum Item selecionado')
         else:
-            if instance_table.selected_index is not None:
-                instance_table.data[instance_table.selected_index]["selected"]=False
-            instance_table.selected_index = current_row
-            instance_table.data[current_row]["Selected"] = True
-            print('Item selecionado', instance_table.data[current_row])
+            self.selected_current_row.append(current_row[0])
+            print('Item selecionado', current_row)            
+        
+
         
 
     def cad_usuario(self):
