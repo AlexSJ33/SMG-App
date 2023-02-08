@@ -2,7 +2,7 @@
 # Sistema - Mini Gestão Empresarial
 
 ***Definições***
-Aplicativo em desenvolvimento para fins de aprendizado.
+> Aplicativo em desenvolvimento para fins de aprendizado.
 - Ferramentas: Python, Kivy, SQLite.
 
 - Funcionalidades:
