@@ -1,10 +1,14 @@
-KivyMD - LOGIN
+## SMG-App
+# ___________________________________________
+# Sistema - Mini Gestão Empresarial
 
 Definições
-App Android de login feito em kivy com banco de dados SQLite
+Aplicativo em desenvolvimento para fins de aprendizado.
+Ferramentas: Python, Kivy, SQLite.
 
 Funcionalidades:
-    Faz login do usuario cadastrado na base de dados
-    Cadastra novo usuario no banco
+    C.R.U.D
+    Validação do usuario cadastrado na base de dados
+    
 
 
