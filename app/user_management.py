@@ -27,7 +27,7 @@ class UserManagement(Screen):
                 ("ID", dp(30)),
                 ("Username", dp(30)),
                 ("E-mail", dp(30)),
-                ("Perfil", dp(30))
+                ("Perfil", dp(30),self.sort_on_col)
             
             ],
             row_data=[
@@ -58,7 +58,16 @@ class UserManagement(Screen):
         else:
             self.selected_current_row.append(current_row[0])
             print('Item selecionado', current_row)            
-        
+
+    def sort_on_col(self,data):
+        return zip(
+            *sorted(
+                enumerate(data),
+                key=lambda l: l[1][3]
+            )
+        )
+        pass
+
 
         
 

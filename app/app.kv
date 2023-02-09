@@ -172,6 +172,8 @@ ScreenManager:
                 color: 'white'
                 halign: 'center'
                 pos_hint: {"center_x": .5, "center_y": .5}
+
+
         MDIconButton:
             icon: "home-circle"
             user_font_size: "68sp"
@@ -180,17 +182,22 @@ ScreenManager:
                 app.root.current = 'menu'
                 app.root.transition.direction = 'right'
 
-
-
-
-        MDFloatingActionButton:
-            icon: 'plus'
-            size_hint: None, None
-            size: dp(48), dp(48)
-            opposite_colors: True
-            elevation_normal: 8
-            pos_hint:{'center_x': 0.90, 'center_y': 0.10}
+        MDRaisedButton:
+            text: "Novo Usuário"
+            md_bg_color: "green"      
+            pos_hint: {'center_x': .16, 'center_y': .10}
             on_release: root.cad_usuario()
+
+        MDRaisedButton:
+            text: "Editar Usuário"
+            text_color: 'red'
+            md_bg_color: "yellow"      
+            pos_hint: {'center_x': .46, 'center_y': .10}
+        
+        MDRaisedButton:
+            text: "Deletar Usuário"
+            md_bg_color: "red"      
+            pos_hint: {'center_x': .80, 'center_y': .10}            
 
 
 <RegisterUser>:
