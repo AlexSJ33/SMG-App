@@ -10,9 +10,11 @@ from database import ConectaBanco
 
 
 class UserManagement(Screen):
+  
 
     def on_enter(self):
         self.loadItems()
+
 
     def loadItems(self):
         self.selected_index = None
@@ -60,13 +62,7 @@ class UserManagement(Screen):
             print('Item selecionado', current_row)            
 
     def sort_on_col(self,data):
-        return zip(
-            *sorted(
-                enumerate(data),
-                key=lambda l: l[1][3]
-            )
-        )
-        pass
+        print('teste')
 
 
         
