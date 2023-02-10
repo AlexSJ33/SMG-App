@@ -151,14 +151,11 @@ ScreenManager:
 
 <UserManagement>:
     name: 'gestao_usuario'
-    
 
     MDFloatLayout:
         orientation: "vertical"
         padding: 20
         md_bg_color: app.theme_cls.primary_light
-        
-
 
 
     #==== Listas os Usuarios ===#
@@ -193,6 +190,7 @@ ScreenManager:
             text_color: 'red'
             md_bg_color: "yellow"      
             pos_hint: {'center_x': .46, 'center_y': .10}
+            on_release: root.edit_user()
         
         MDRaisedButton:
             text: "Deletar Usuário"
@@ -331,8 +329,39 @@ ScreenManager:
         icon_color: "orange"
         on_release: root.fechar()
 
+<EditUser>
+    orientation: "vertical"
+    padding: "10dp"
+    size_hint: .9, .9
+    pos_hint: {"center_x": .5, "center_y": .5}
 
+    MDFloatLayout:
+        orientation: "vertical"
+        md_bg_color:'#D3D3D3'
+        padding: "1dp"
 
+        MDTopAppBar:
+            id: toolbar
+            elevation: 1
+            title: "Editar Usuário"
+            pos_hint: {"center_x": .5, "center_y": .94}
+            md_bg_color: '#808080'
+
+        MDRaisedButton:
+            text: "Cancelar"
+            text_color: 'black'
+            md_bg_color: "white"
+            pos_hint: {'center_x': .7, 'center_y': .1}
+            on_release:
+                root.fechar()
+
+        MDRaisedButton:
+            text: "Salvar"
+            md_bg_color: "blue"
+            pos_hint: {'center_x': .9, 'center_y': .1}
+            # on_release:
+            #     root.get_usuario()
+            #     root.limpar_text()
 
 <ClientManagement>:
     name: 'gestao_cliente'

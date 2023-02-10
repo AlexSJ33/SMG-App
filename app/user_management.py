@@ -25,11 +25,12 @@ class UserManagement(Screen):
             use_pagination=True,
             check=True,
             rows_num=10,
+            background_color_header="#808080",
             column_data=[
                 ("ID", dp(30)),
                 ("Username", dp(30)),
                 ("E-mail", dp(30)),
-                ("Perfil", dp(30),self.sort_on_col)
+                ("Perfil", dp(30))
             
             ],
             row_data=[
@@ -40,7 +41,7 @@ class UserManagement(Screen):
                 i[:][4],
                 )
                 for i in ListItems
-                ],
+                ],             
             )
 
         self.add_widget(self.data_tables) 
@@ -51,22 +52,33 @@ class UserManagement(Screen):
         self.selected_current_row = []
 
         self.data_tables.bind(on_check_press=self.on_check_press)
+        self.data_tables.bind(on_row_press=self.on_row_press)
+
+    def on_row_press(self, instance_table, instance_row):
         
+        index = instance_row.index
+        cols_num = len(instance_table. column_data)
+        row_num = int(index/cols_num)
+        col_num = index%cols_num
+        cell_row = instance_table.table_data.view_adapter.get_visible_view(row_num*cols_num)
+        if cell_row.ids.check.state == 'normal':
+            instance_table.table_data.select_all('normal')
+            cell_row.ids.check.state = 'down'
+        else:
+            cell_row.ids.check.state = 'normal'
+        instance_table.table_data.on_mouse_select(instance_row)
 
     def on_check_press(self, instance_table, current_row):
         if current_row[0] in self.selected_current_row:
             self.selected_current_row.remove(current_row[0])
-            print('Nenhum Item selecionado')
         else:
             self.selected_current_row.append(current_row[0])
             print('Item selecionado', current_row)            
 
-    def sort_on_col(self,data):
-        print('teste')
-
-
+    def edit_user(self):
+        self.add_widget(EditUser(MDCard))
         
-
+        
     def cad_usuario(self):
 
         self.add_widget(RegisterUser())
@@ -125,7 +137,14 @@ class RegisterUser(MDCard):
             self.admin = '0'
         self.adminstrador = ''
         self.adminstrador= self.admin
-    
+
+class EditUser(MDCard):
+
+
+    def fechar(self):
+        self.parent.remove_widget(self)   
+
+
 c=ConectaBanco()
 c.connect()
 c.create_table()
