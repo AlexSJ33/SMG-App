@@ -11,6 +11,9 @@ from database import ConectaBanco
 
 class UserManagement(Screen):
   
+    row_edit = []
+    check = False
+    maior_q_um = False
 
     def on_enter(self):
         self.loadItems()
@@ -53,6 +56,7 @@ class UserManagement(Screen):
 
         self.data_tables.bind(on_check_press=self.on_check_press)
         self.data_tables.bind(on_row_press=self.on_row_press)
+        
 
     def on_row_press(self, instance_table, instance_row):
         
@@ -63,24 +67,50 @@ class UserManagement(Screen):
         cell_row = instance_table.table_data.view_adapter.get_visible_view(row_num*cols_num)
         if cell_row.ids.check.state == 'normal':
             instance_table.table_data.select_all('normal')
+            self.check = True
             cell_row.ids.check.state = 'down'
         else:
+            self.check = False
             cell_row.ids.check.state = 'normal'
+            
         instance_table.table_data.on_mouse_select(instance_row)
+
+
+        #print(row_num)
+
+        # if cell_row > 1:
+        #     self.maior_q_um = True
+        
+        
 
     def on_check_press(self, instance_table, current_row):
         if current_row[0] in self.selected_current_row:
             self.selected_current_row.remove(current_row[0])
+
         else:
             self.selected_current_row.append(current_row[0])
             print('Item selecionado', current_row)            
+            self.row_edit.insert(0,current_row)
+
+
 
     def edit_user(self):
-        self.add_widget(EditUser(MDCard))
+        if self.check == False:
+            print('check = ',self.check)
+            print('Maior que Um = ',self.maior_q_um)
+        else:
+            print('check = ',self.check)
+            print('Maior que Um = ',self.maior_q_um)
+            print(self.row_edit[0])
+
+        # if rows[0] not in self.selected_current_row:
+        #     print('Selecione um item para Editar')
+        # else:
+        #     self.add_widget(EditUser(MDCard))
         
         
     def cad_usuario(self):
-
+        
         self.add_widget(RegisterUser())
 
 class RegisterUser(MDCard):
