@@ -22,13 +22,25 @@ class UserManagement(Screen):
     def loadItems(self):
         self.selected_index = None
         
+        for i in ListItems:
+            if i[4] == '1':
+                i[4]=='Admnistrador'
+            elif i[4] == '0':
+                i[4] =='Normal User'
+        print(ListItems)
+
+
+
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
             pos_hint={'center_x':.5, 'center_y':.5},
             use_pagination=True,
-            check=True,
+            check=False,
             rows_num=10,
             background_color_header="#808080",
+
+
+            
             column_data=[
                 ("ID", dp(30)),
                 ("Username", dp(30)),
@@ -41,12 +53,13 @@ class UserManagement(Screen):
                 i[:][0],
                 i[:][1],
                 i[:][2],
-                i[:][4],
+                i[:][4],#("close-circle", [0, 1, 0, 1],""),
                 )
                 for i in ListItems
-                ],             
+                
+                ],
             )
-
+        
         self.add_widget(self.data_tables) 
         
 
@@ -91,6 +104,7 @@ class UserManagement(Screen):
             self.selected_current_row.append(current_row[0])
             print('Item selecionado', current_row)            
             self.row_edit.insert(0,current_row)
+            
 
 
 
