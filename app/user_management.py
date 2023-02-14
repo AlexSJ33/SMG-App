@@ -21,15 +21,14 @@ class UserManagement(Screen):
 
     def loadItems(self):
         self.selected_index = None
-        
-        for i in ListItems:
-            if i[4] == '1':
-                i[4]=='Admnistrador'
-            elif i[4] == '0':
-                i[4] =='Normal User'
-        print(ListItems)
+        self.icon = '("check-circle", [0, 1, 0, 1],""),("close-circle", [1, 0, 0, 1],"")'
 
-
+        for it in ListItems:
+            if it[4] == '1':
+                print('Administrador')
+                
+            else:
+                print('normal user')
 
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
@@ -53,7 +52,7 @@ class UserManagement(Screen):
                 i[:][0],
                 i[:][1],
                 i[:][2],
-                i[:][4],#("close-circle", [0, 1, 0, 1],""),
+                i[:][4],
                 )
                 for i in ListItems
                 
