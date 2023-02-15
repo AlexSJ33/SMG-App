@@ -3,6 +3,7 @@ from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
 from kivy.metrics import dp
+from kivymd.uix.list import OneLineListItem
 
 from database import data as ListItems
 from database import ConectaBanco
@@ -10,7 +11,8 @@ from database import ConectaBanco
 
 
 class UserManagement(Screen):
-  
+
+
     row_edit = []
     check = False
     maior_q_um = False
