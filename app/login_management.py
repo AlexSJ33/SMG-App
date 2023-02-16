@@ -37,7 +37,7 @@ class Login(Screen):
             if self.username == '' or self.password == '':
                 self.ids.label_login.text = ' '
 
-            elif self.username == users[1] and self.password == users[3]:
+            elif self.username == users['user'] and self.password == users['password']:
                 print(self.username)
                 self.ids.label_login.text = 'Login Accept !!'
                 self.ids.label_login.text_color= 'green'

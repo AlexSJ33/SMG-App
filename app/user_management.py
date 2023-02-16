@@ -1,9 +1,8 @@
-from kivy.uix.screenmanager import Screen,ScreenManager
+from kivy.uix.screenmanager import Screen
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
 from kivy.metrics import dp
-from kivymd.uix.list import OneLineListItem
 
 from database import data as ListItems
 from database import ConectaBanco
@@ -11,6 +10,20 @@ from database import ConectaBanco
 
 
 class UserManagement(Screen):
+
+    new_list = [
+        (1, 'admin', 'admin@teste.com', '123', ("check-circle", [0, 1, 0, 1],"")),
+        (3, 'alex', 'alex@teste.com', '123', ("close-circle", [1, 0, 0, 1],"")),
+        (4, 'teste1', 'teste1@teste.com.br', '123', ("close-circle", [1, 0, 0, 1],"")),
+        (5, 'teste2', 'teste2@teste.com.br', '123', ("check-circle", [0, 1, 0, 1],"")),
+        (6, 'teste3', 'teste3@teste.com.', '321', ("close-circle", [1, 0, 0, 1],"")),
+        (7, 'teste4', 'teste4@teste.com', '321', ("close-circle", [1, 0, 0, 1],"")),
+        (8, 'teste5', 'teste5@teste.com', '321', ("close-circle", [1, 0, 0, 1],""))
+        ]
+    
+    new_list = ['maria' if x[3] == '123'else 'joão' for x in new_list]
+    print(new_list)
+
 
 
     row_edit = []
@@ -25,12 +38,12 @@ class UserManagement(Screen):
         self.selected_index = None
         self.icon = '("check-circle", [0, 1, 0, 1],""),("close-circle", [1, 0, 0, 1],"")'
 
-        for it in ListItems:
-            if it[4] == '1':
-                print('Administrador')
+        # for it in ListItems:
+        #     if it[4] == '1':
+        #         print('Administrador')
                 
-            else:
-                print('normal user')
+        #     else:
+        #         print('normal user')
 
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
@@ -46,15 +59,15 @@ class UserManagement(Screen):
                 ("ID", dp(30)),
                 ("Username", dp(30)),
                 ("E-mail", dp(30)),
-                ("Perfil", dp(30))
+                ("Administrador", dp(30))
             
             ],
             row_data=[
                 (
-                i[:][0],
-                i[:][1],
-                i[:][2],
-                i[:][4],
+                i['id'],
+                i['user'],
+                i['email'],
+                i['admin'],
                 )
                 for i in ListItems
                 
