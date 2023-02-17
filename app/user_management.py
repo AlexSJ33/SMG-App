@@ -8,59 +8,42 @@ from database import data as ListItems
 from database import ConectaBanco
 
 
-
 class UserManagement(Screen):
 
-    new_list = [
-        (1, 'admin', 'admin@teste.com', '123', ("check-circle", [0, 1, 0, 1],"")),
-        (3, 'alex', 'alex@teste.com', '123', ("close-circle", [1, 0, 0, 1],"")),
-        (4, 'teste1', 'teste1@teste.com.br', '123', ("close-circle", [1, 0, 0, 1],"")),
-        (5, 'teste2', 'teste2@teste.com.br', '123', ("check-circle", [0, 1, 0, 1],"")),
-        (6, 'teste3', 'teste3@teste.com.', '321', ("close-circle", [1, 0, 0, 1],"")),
-        (7, 'teste4', 'teste4@teste.com', '321', ("close-circle", [1, 0, 0, 1],"")),
-        (8, 'teste5', 'teste5@teste.com', '321', ("close-circle", [1, 0, 0, 1],""))
-        ]
     
-    new_list = ['maria' if x[3] == '123'else 'joão' for x in new_list]
-    print(new_list)
-
-
-
     row_edit = []
     check = False
     maior_q_um = False
 
+    
     def on_enter(self):
         self.loadItems()
 
-
     def loadItems(self):
         self.selected_index = None
-        self.icon = '("check-circle", [0, 1, 0, 1],""),("close-circle", [1, 0, 0, 1],"")'
 
-        # for it in ListItems:
-        #     if it[4] == '1':
-        #         print('Administrador')
-                
-        #     else:
-        #         print('normal user')
+        for it in ListItems:
+            if it['admin'] == '1':
+                it['admin'] = ("check-circle", [0, 1, 0, 1],"")
+            else:
+                it['admin'] = ("close-circle", [1, 0, 0, 1],"")
 
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
             pos_hint={'center_x':.5, 'center_y':.5},
             use_pagination=True,
-            check=False,
+            check=True,
             rows_num=10,
             background_color_header="#808080",
-
-
+            #background_color_cell="#451938",
+            #background_color_selected_cell="e4514f",
             
+
             column_data=[
                 ("ID", dp(30)),
                 ("Username", dp(30)),
-                ("E-mail", dp(30)),
-                ("Administrador", dp(30))
-            
+                ("E-mail", dp(50)),
+                ("Administrador", dp(46))
             ],
             row_data=[
                 (
@@ -70,22 +53,21 @@ class UserManagement(Screen):
                 i['admin'],
                 )
                 for i in ListItems
-                
                 ],
             )
         
-        self.add_widget(self.data_tables) 
-        
-
+        self.add_widget(self.data_tables)
 
         self.data_tables.selected_index = None
         self.selected_current_row = []
+        
+
 
         self.data_tables.bind(on_check_press=self.on_check_press)
         self.data_tables.bind(on_row_press=self.on_row_press)
-        
 
     def on_row_press(self, instance_table, instance_row):
+        
         
         index = instance_row.index
         cols_num = len(instance_table. column_data)
@@ -96,6 +78,8 @@ class UserManagement(Screen):
             instance_table.table_data.select_all('normal')
             self.check = True
             cell_row.ids.check.state = 'down'
+            
+            
         else:
             self.check = False
             cell_row.ids.check.state = 'normal'
@@ -123,6 +107,9 @@ class UserManagement(Screen):
 
 
     def edit_user(self):
+        self.remove_widget(self.data_tables)
+        self.add_widget(EditUser(MDCard))
+
         if self.check == False:
             print('check = ',self.check)
             print('Maior que Um = ',self.maior_q_um)
@@ -131,6 +118,7 @@ class UserManagement(Screen):
             print('Maior que Um = ',self.maior_q_um)
             print(self.row_edit[0])
 
+############################################################
         # if rows[0] not in self.selected_current_row:
         #     print('Selecione um item para Editar')
         # else:
@@ -180,7 +168,7 @@ class RegisterUser(MDCard):
             return c.inserir_dados(data)
 
     def fechar(self):
-        self.parent.remove_widget(self)   
+        self.parent.remove_widget(self)
 
     def limpar_text(self):
         self.ids.usuario.text = ''
@@ -199,8 +187,12 @@ class RegisterUser(MDCard):
 class EditUser(MDCard):
 
 
-    def fechar(self):
-        self.parent.remove_widget(self)   
+    def cancelar(self):
+        self.parent.remove_widget(self)
+        self.add_widget(UserManagement())
+        
+        
+
 
 
 c=ConectaBanco()

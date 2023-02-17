@@ -17,7 +17,7 @@ from kivy.core.window import Window
 from kivymd.app import MDApp
 from kivy.lang import Builder
 
-Window.size = (680, 600)
+Window.size = (700, 600)
 
 screen.add_widget(ClientManagement())
 screen.add_widget(UserManagement())

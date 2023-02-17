@@ -1,9 +1,10 @@
 import sqlite3
 
-data = []
+data=[]
 
 class ConectaBanco:
     
+   
     
     # --- Criando a conexão com banco de dados "kivy_data.db"
     def __init__(self, name = 'kivy_data.db') -> None:
@@ -67,11 +68,14 @@ class ConectaBanco:
                 #ListaItens=(users[0],users[1],users[2],users[3],users[4])
                 ListaItens={'id':users[0], 'user':users[1],'email':users[2],'password':users[3],'admin':users[4]}
                 data.append(ListaItens)
-            print(data)
+            
+           
         except:
             pass
             return usuarios
-    
+
+
+
 
   
         
