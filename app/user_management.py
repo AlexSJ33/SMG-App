@@ -8,21 +8,23 @@ from database import data as ListItems
 from database import ConectaBanco
 
 
+
 class UserManagement(Screen):
 
-    
     row_edit = []
     check = False
     maior_q_um = False
-
+    
     
     def on_enter(self):
         self.loadItems()
 
     def loadItems(self):
+        nova_lista = ListItems
+
         self.selected_index = None
 
-        for it in ListItems:
+        for it in nova_lista:
             if it['admin'] == '1':
                 it['admin'] = ("check-circle", [0, 1, 0, 1],"")
             else:
@@ -52,7 +54,7 @@ class UserManagement(Screen):
                 i['email'],
                 i['admin'],
                 )
-                for i in ListItems
+                for i in nova_lista
                 ],
             )
         
@@ -107,8 +109,10 @@ class UserManagement(Screen):
 
 
     def edit_user(self):
+        self.on_enter()
         self.remove_widget(self.data_tables)
         self.add_widget(EditUser(MDCard))
+        
 
         if self.check == False:
             print('check = ',self.check)
@@ -117,6 +121,7 @@ class UserManagement(Screen):
             print('check = ',self.check)
             print('Maior que Um = ',self.maior_q_um)
             print(self.row_edit[0])
+        
 
 ############################################################
         # if rows[0] not in self.selected_current_row:
@@ -186,8 +191,8 @@ class RegisterUser(MDCard):
 
 class EditUser(MDCard):
 
-
     def cancelar(self):
+        
         self.parent.remove_widget(self)
         self.add_widget(UserManagement())
         
