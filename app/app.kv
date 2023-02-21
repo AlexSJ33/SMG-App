@@ -151,7 +151,7 @@ ScreenManager:
 
 <UserManagement>:
     name: 'gestao_usuario'
-
+    
     MDFloatLayout:
         orientation: "vertical"
         padding: 20
@@ -159,6 +159,7 @@ ScreenManager:
 
 
     #==== Listas os Usuarios ===#
+
         MDTopAppBar:
             elevation: 1
             md_bg_color: 'green'
@@ -176,6 +177,7 @@ ScreenManager:
             user_font_size: "68sp"
             pos_hint: {'center_x': .1, 'center_y': .96}
             on_press:
+                root.limpar()
                 app.root.current = 'menu'
                 app.root.transition.direction = 'right'
 
@@ -190,7 +192,8 @@ ScreenManager:
             text_color: 'red'
             md_bg_color: "yellow"      
             pos_hint: {'center_x': .46, 'center_y': .10}
-            on_release: root.edit_user()
+            on_release:
+                root.edit_user()
         
         MDRaisedButton:
             text: "Deletar Usuário"
@@ -202,9 +205,7 @@ ScreenManager:
     orientation: "vertical"
     padding: "0dp"
     size_hint: .9, .9
-    
     pos_hint: {"center_x": .5, "center_y": .5}
-    
 
     MDFloatLayout:
         orientation: "vertical"
@@ -300,33 +301,6 @@ ScreenManager:
             on_release:
                 root.get_usuario()
                 root.limpar_text()
-<ListarUsuarios>
-    orientation: "vertical"
-    padding: "0dp"
-    size_hint: .9, .9
-    pos_hint: {"center_x": .5, "center_y": .5}
-    md_bg_color: 'azure'
-
-    MDTopAppBar:
-        elevation: 1
-        md_bg_color: 'green'
-
-        MDLabel:
-            
-            text: 'LISTA DE USUÁRIOS'
-            color: 'white'
-            halign: 'center'
-            
-            pos_hint: {"center_x": .5, "center_y": .5}
-
-
-    MDIconButton:
-        icon: "close-circle-outline"
-        pos_hint: {"center_x": .5, "center_y": .1}    
-        icon_size: "32sp"
-        theme_icon_color: "Custom"
-        icon_color: "orange"
-        on_release: root.fechar()
 
 <EditUser>
     orientation: "vertical"
@@ -353,6 +327,7 @@ ScreenManager:
             pos_hint: {'center_x': .7, 'center_y': .1}
             on_release:
                 root.cancelar()
+                
 
         MDRaisedButton:
             text: "Salvar"

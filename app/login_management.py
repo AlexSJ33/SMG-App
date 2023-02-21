@@ -1,7 +1,6 @@
 from kivy.uix.screenmanager import Screen,ScreenManager
 from kivymd.uix.dialog import MDDialog
 from kivymd.app import MDApp
-
 from database import data as ListItems
 
 global autenticado
@@ -54,3 +53,5 @@ class Menu(Screen):
     def on_enter(self):
         name = autenticado[0]
         self.ids.label_menu.text = 'Olá ' + str(name)
+
+

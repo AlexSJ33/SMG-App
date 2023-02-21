@@ -4,6 +4,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
 from kivy.metrics import dp
 
+
 from database import data as ListItems
 from database import ConectaBanco
 
@@ -11,24 +12,24 @@ from database import ConectaBanco
 
 class UserManagement(Screen):
 
+    
     row_edit = []
     check = False
     maior_q_um = False
-    
-    
-    def on_enter(self):
-        self.loadItems()
+
 
     def loadItems(self):
-        nova_lista = ListItems
 
         self.selected_index = None
 
-        for it in nova_lista:
+        for it in ListItems:
             if it['admin'] == '1':
                 it['admin'] = ("check-circle", [0, 1, 0, 1],"")
-            else:
+            elif it['admin'] == '0':
                 it['admin'] = ("close-circle", [1, 0, 0, 1],"")
+            else:
+                pass
+        
 
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
@@ -39,14 +40,13 @@ class UserManagement(Screen):
             background_color_header="#808080",
             #background_color_cell="#451938",
             #background_color_selected_cell="e4514f",
-            
 
             column_data=[
                 ("ID", dp(30)),
                 ("Username", dp(30)),
                 ("E-mail", dp(50)),
                 ("Administrador", dp(46))
-            ],
+            ],                
             row_data=[
                 (
                 i['id'],
@@ -54,19 +54,22 @@ class UserManagement(Screen):
                 i['email'],
                 i['admin'],
                 )
-                for i in nova_lista
+                for i in ListItems
                 ],
             )
-        
+            
         self.add_widget(self.data_tables)
 
         self.data_tables.selected_index = None
         self.selected_current_row = []
-        
-
 
         self.data_tables.bind(on_check_press=self.on_check_press)
         self.data_tables.bind(on_row_press=self.on_row_press)
+
+
+    def on_enter(self):
+        self.loadItems()    
+
 
     def on_row_press(self, instance_table, instance_row):
         
@@ -104,12 +107,9 @@ class UserManagement(Screen):
             self.selected_current_row.append(current_row[0])
             print('Item selecionado', current_row)            
             self.row_edit.insert(0,current_row)
-            
-
-
 
     def edit_user(self):
-        self.on_enter()
+        
         self.remove_widget(self.data_tables)
         self.add_widget(EditUser(MDCard))
         
@@ -121,6 +121,14 @@ class UserManagement(Screen):
             print('check = ',self.check)
             print('Maior que Um = ',self.maior_q_um)
             print(self.row_edit[0])
+
+    def fechar(self):
+        self.remove_widget(self.data_tables)
+        self.on_enter()
+
+    def limpar(self):
+        #self.add_widget(self.data_tables)
+        self.data_tables.clear_widgets()
         
 
 ############################################################
@@ -194,14 +202,12 @@ class EditUser(MDCard):
     def cancelar(self):
         
         self.parent.remove_widget(self)
-        self.add_widget(UserManagement())
-        
-        
+        print(UserManagement)
+
 
 
 
 c=ConectaBanco()
 c.connect()
 c.create_table()
-c.listar_dados()    
-   
+c.listar_dados()   
