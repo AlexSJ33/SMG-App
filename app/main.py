@@ -26,7 +26,8 @@ class MyApp(MDApp):
     def build(self):
         kv = Builder.load_file('app.kv')
         screen = kv
-
+        self.theme_cls.theme_style = "Dark"
+        #self.theme_cls.primary_palette = "Orange"
         return screen
 
 if __name__=='__main__':

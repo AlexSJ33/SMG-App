@@ -176,8 +176,7 @@ ScreenManager:
             icon: "home-circle"
             user_font_size: "68sp"
             pos_hint: {'center_x': .1, 'center_y': .96}
-            on_press:
-                root.limpar()
+            on_release:
                 app.root.current = 'menu'
                 app.root.transition.direction = 'right'
 
@@ -198,7 +197,9 @@ ScreenManager:
         MDRaisedButton:
             text: "Deletar Usuário"
             md_bg_color: "red"      
-            pos_hint: {'center_x': .80, 'center_y': .10}            
+            pos_hint: {'center_x': .80, 'center_y': .10}
+            on_release:
+                root.delete_user()
 
 
 <RegisterUser>:

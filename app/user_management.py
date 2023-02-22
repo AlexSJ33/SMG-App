@@ -1,8 +1,9 @@
-from kivy.uix.screenmanager import Screen
+from kivymd.uix.screen import MDScreen
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
 from kivy.metrics import dp
+from kivy.clock import Clock
 
 
 from database import data as ListItems
@@ -10,7 +11,7 @@ from database import ConectaBanco
 
 
 
-class UserManagement(Screen):
+class UserManagement(MDScreen):
 
     
     row_edit = []
@@ -36,7 +37,7 @@ class UserManagement(Screen):
             pos_hint={'center_x':.5, 'center_y':.5},
             use_pagination=True,
             check=True,
-            rows_num=10,
+            #rows_num=10,
             background_color_header="#808080",
             #background_color_cell="#451938",
             #background_color_selected_cell="e4514f",
@@ -45,19 +46,19 @@ class UserManagement(Screen):
                 ("ID", dp(30)),
                 ("Username", dp(30)),
                 ("E-mail", dp(50)),
-                ("Administrador", dp(46))
-            ],                
+                ("Administrador", dp(46)),
+            ],
             row_data=[
                 (
-                i['id'],
-                i['user'],
-                i['email'],
-                i['admin'],
+                item['id'],
+                item['user'],
+                item['email'],
+                item['admin'],
                 )
-                for i in ListItems
+                for item in ListItems
                 ],
             )
-            
+        
         self.add_widget(self.data_tables)
 
         self.data_tables.selected_index = None
@@ -109,8 +110,6 @@ class UserManagement(Screen):
             self.row_edit.insert(0,current_row)
 
     def edit_user(self):
-        
-        self.remove_widget(self.data_tables)
         self.add_widget(EditUser(MDCard))
         
 
@@ -121,15 +120,12 @@ class UserManagement(Screen):
             print('check = ',self.check)
             print('Maior que Um = ',self.maior_q_um)
             print(self.row_edit[0])
+    
+    def delete_user(self):
+        pass
+    
 
-    def fechar(self):
-        self.remove_widget(self.data_tables)
-        self.on_enter()
 
-    def limpar(self):
-        #self.add_widget(self.data_tables)
-        self.data_tables.clear_widgets()
-        
 
 ############################################################
         # if rows[0] not in self.selected_current_row:
@@ -199,10 +195,9 @@ class RegisterUser(MDCard):
 
 class EditUser(MDCard):
 
-    def cancelar(self):
-        
+    def cancelar(self):      
         self.parent.remove_widget(self)
-        print(UserManagement)
+  
 
 
 
