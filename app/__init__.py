@@ -4,6 +4,7 @@ from kivy.clock import Clock
 from kivymd.app import MDApp
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.screen import MDScreen
+from database import data as ListItems
 KV = '''
 MDBoxLayout:
     orientation: "vertical"

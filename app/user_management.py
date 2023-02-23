@@ -122,10 +122,14 @@ class UserManagement(MDScreen):
             print(self.row_edit[0])
     
     def delete_user(self):
-        pass
+        def deselect_rows(*args):
+            self.data_tables.table_data.select_all("normal")
     
-
-
+        for data in self.data_tables.get_row_checks():
+            print(data)
+            self.data_tables.remove_row(data)
+            
+        Clock.schedule_once(deselect_rows)
 
 ############################################################
         # if rows[0] not in self.selected_current_row:
