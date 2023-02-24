@@ -9,10 +9,14 @@ from kivy.clock import Clock
 from database import data as ListItems
 from database import ConectaBanco
 
+c=ConectaBanco()
+c.connect()
+c.create_table()
+
 
 
 class UserManagement(MDScreen):
-
+    c.listar_dados()
     
     row_edit = []
     check = False
@@ -22,6 +26,7 @@ class UserManagement(MDScreen):
     def loadItems(self):
 
         self.selected_index = None
+        print(ListItems)
 
         for it in ListItems:
             if it['admin'] == '1':
@@ -126,8 +131,9 @@ class UserManagement(MDScreen):
             self.data_tables.table_data.select_all("normal")
     
         for data in self.data_tables.get_row_checks():
-            print(data)
-            self.data_tables.remove_row(data)
+            #print(data[0])
+            #self.data_tables.remove_row(data)
+            c.delete_user(data[0])
             
         Clock.schedule_once(deselect_rows)
 
@@ -206,7 +212,5 @@ class EditUser(MDCard):
 
 
 
-c=ConectaBanco()
-c.connect()
-c.create_table()
-c.listar_dados()   
+
+

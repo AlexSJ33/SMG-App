@@ -74,6 +74,22 @@ class ConectaBanco:
             pass
             return usuarios
 
+    def delete_user(self, id):
+        self.connect()
+
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("DELETE FROM usuario2 where id=?",(id,))
+            self.record_data()
+            
+            print('usuario deletado com sucesso!')
+            
+            
+        except Exception as e:
+            print('Erro ao tentar deletar\n',e)
+        
+        self.close_connection()     
+
 
 
 
