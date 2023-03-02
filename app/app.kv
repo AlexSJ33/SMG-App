@@ -151,7 +151,8 @@ ScreenManager:
 
 <UserManagement>:
     name: 'gestao_usuario'
-    
+    id: table_screen
+
     MDFloatLayout:
         orientation: "vertical"
         padding: 20
@@ -193,13 +194,13 @@ ScreenManager:
             pos_hint: {'center_x': .46, 'center_y': .10}
             on_release:
                 root.edit_user()
-        
+ 
         MDRaisedButton:
             text: "Deletar Usuário"
             md_bg_color: "red"      
             pos_hint: {'center_x': .80, 'center_y': .10}
             on_release:
-                root.delete_user()
+                table_screen.delete_user()
 
 
 <RegisterUser>:

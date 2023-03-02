@@ -28,15 +28,6 @@ class UserManagement(MDScreen):
         self.selected_index = None
         print(ListItems)
 
-        for it in ListItems:
-            if it['admin'] == '1':
-                it['admin'] = ("check-circle", [0, 1, 0, 1],"")
-            elif it['admin'] == '0':
-                it['admin'] = ("close-circle", [1, 0, 0, 1],"")
-            else:
-                pass
-        
-
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
             pos_hint={'center_x':.5, 'center_y':.5},
@@ -53,16 +44,16 @@ class UserManagement(MDScreen):
                 ("E-mail", dp(50)),
                 ("Administrador", dp(46)),
             ],
-            row_data=[
-                (
-                item['id'],
-                item['user'],
-                item['email'],
-                item['admin'],
-                )
-                for item in ListItems
-                ],
+            row_data=[],
             )
+        for item in ListItems:
+            if item['admin'] == '1':
+                item['admin'] = ("check-circle", [0, 1, 0, 1],"")
+            elif item['admin'] == '0':
+                item['admin'] = ("close-circle", [1, 0, 0, 1],"")
+            else:
+                pass
+            self.data_tables.add_row((item['id'], item['user'], item['email'], item['admin']))        
         
         self.add_widget(self.data_tables)
 
@@ -129,11 +120,14 @@ class UserManagement(MDScreen):
     def delete_user(self):
         def deselect_rows(*args):
             self.data_tables.table_data.select_all("normal")
-    
+
+
         for data in self.data_tables.get_row_checks():
-            #print(data[0])
-            #self.data_tables.remove_row(data)
-            c.delete_user(data[0])
+            print(data)
+            print(type(data))
+         
+            self.data_tables.remove_row(data)
+            #c.delete_user(data[0])
             
         Clock.schedule_once(deselect_rows)
 
