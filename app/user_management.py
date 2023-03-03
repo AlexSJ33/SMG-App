@@ -24,9 +24,9 @@ class UserManagement(MDScreen):
 
 
     def loadItems(self):
-
+        
         self.selected_index = None
-        print(ListItems)
+        #print(ListItems)
 
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
@@ -62,6 +62,7 @@ class UserManagement(MDScreen):
 
         self.data_tables.bind(on_check_press=self.on_check_press)
         self.data_tables.bind(on_row_press=self.on_row_press)
+        
 
 
     def on_enter(self):
@@ -116,19 +117,21 @@ class UserManagement(MDScreen):
             print('check = ',self.check)
             print('Maior que Um = ',self.maior_q_um)
             print(self.row_edit[0])
-    
+
+##################### DELETAR USUARIO #########################    
     def delete_user(self):
         def deselect_rows(*args):
             self.data_tables.table_data.select_all("normal")
 
 
         for data in self.data_tables.get_row_checks():
-            print(data)
-            print(type(data))
-         
-            self.data_tables.remove_row(data)
-            #c.delete_user(data[0])
+            c.delete_user(data[0])
+            #print(data)
+            #self.loadItems()
             
+            self.data_tables.clear_widgets()
+            self.on_enter()
+
         Clock.schedule_once(deselect_rows)
 
 ############################################################
