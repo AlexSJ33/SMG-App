@@ -82,16 +82,19 @@ class ConectaBanco:
             cursor = self.connection.cursor()
             cursor.execute("SELECT * FROM usuario2")
             usuarios = cursor.fetchall()
-
+            
+            user_deleted = False
             for users in usuarios:
-                if id in str(users[0]):        
+                if id == str(users[0]):
                     cursor.execute("DELETE FROM usuario2 where id=?",(id,))
                     self.record_data()
+                    user_deleted = True
                     print('usuario deletado com sucesso!')
                     break
-                else:
-                    
-                    print('usuario nao encontrado com ID', id)
+
+            if not user_deleted:
+                print('Usuário não encontrado com ID', id)
+                
             
         except Exception as e:
             print('Erro ao tentar deletar\n',e)

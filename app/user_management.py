@@ -3,7 +3,10 @@ from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
 from kivy.metrics import dp
-from kivy.clock import Clock
+from kivy.clock import Clock, mainthread
+import threading
+
+
 
 
 from database import data as ListItems
@@ -12,18 +15,43 @@ from database import ConectaBanco
 c=ConectaBanco()
 c.connect()
 c.create_table()
-
+c.listar_dados()
 
 
 class UserManagement(MDScreen):
-    c.listar_dados()
+   
     
     row_edit = []
     check = False
     maior_q_um = False
 
+    def on_enter(self):
+        self.start_second_thread()
 
-    def loadItems(self):
+    def start_second_thread(self):
+    
+        threading.Thread(target=self.loadItems(ListItems)).start()
+
+
+
+    # def load_data(self, *args):
+    #     values = []
+    #     for item in ListItems:
+    #         if item['admin'] == '1':
+    #             item['admin'] = ("check-circle", [0, 1, 0, 1],"")
+    #         elif item['admin'] == '0':
+    #             item['admin'] = ("close-circle", [1, 0, 0, 1],"")
+    #         else:
+    #             pass
+    #         values.append(item['id'], item['user'], item['email'], item['admin'])
+        
+    #     self.loadItems(values)
+
+
+
+    
+    def loadItems(self, dados):
+        print(dados)
         
         self.selected_index = None
         #print(ListItems)
@@ -45,18 +73,21 @@ class UserManagement(MDScreen):
                 ("Administrador", dp(46)),
             ],
             row_data=[],
-            )
-        for item in ListItems:
+        )
+        for item in dados:
             if item['admin'] == '1':
                 item['admin'] = ("check-circle", [0, 1, 0, 1],"")
             elif item['admin'] == '0':
                 item['admin'] = ("close-circle", [1, 0, 0, 1],"")
             else:
                 pass
-            self.data_tables.add_row((item['id'], item['user'], item['email'], item['admin']))        
+
+            self.data_tables.add_row((item['id'], item['user'], item['email'], item['admin']))
+
         
         self.add_widget(self.data_tables)
 
+        
         self.data_tables.selected_index = None
         self.selected_current_row = []
 
@@ -65,8 +96,8 @@ class UserManagement(MDScreen):
         
 
 
-    def on_enter(self):
-        self.loadItems()    
+    # def on_enter(self):
+    #     self.loadItems(self.load_data)    
 
 
     def on_row_press(self, instance_table, instance_row):
@@ -129,7 +160,7 @@ class UserManagement(MDScreen):
             #print(data)
             #self.loadItems()
             
-            self.data_tables.clear_widgets()
+            
             self.on_enter()
 
         Clock.schedule_once(deselect_rows)
