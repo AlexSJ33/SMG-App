@@ -22,6 +22,7 @@ Window.size = (700, 600)
 screen.add_widget(ClientManagement())
 screen.add_widget(UserManagement())
 
+
 class MyApp(MDApp):
     def build(self):
         kv = Builder.load_file('app.kv')

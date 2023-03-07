@@ -53,5 +53,3 @@ class Menu(Screen):
     def on_enter(self):
         name = autenticado[0]
         self.ids.label_menu.text = 'Olá ' + str(name)
-
-

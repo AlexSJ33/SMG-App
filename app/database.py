@@ -72,7 +72,7 @@ class ConectaBanco:
            
         except:
             pass
-            return usuarios
+            #return usuarios
 
     def delete_user(self, id):
         self.connect()
@@ -99,10 +99,4 @@ class ConectaBanco:
         except Exception as e:
             print('Erro ao tentar deletar\n',e)
         
-        self.close_connection()     
-
-
-
-
-  
-        
+        self.close_connection()

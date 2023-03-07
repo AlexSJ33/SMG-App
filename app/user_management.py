@@ -3,13 +3,13 @@ from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
 from kivy.metrics import dp
-from kivy.clock import Clock, mainthread
+from kivy.clock import Clock
 import threading
 
 
 
 
-from database import data as ListItems
+from database import data
 from database import ConectaBanco
 
 c=ConectaBanco()
@@ -30,7 +30,7 @@ class UserManagement(MDScreen):
 
     def start_second_thread(self):
     
-        threading.Thread(target=self.loadItems(ListItems)).start()
+        threading.Thread(target=self.loadItems(data)).start()
 
 
 
@@ -94,11 +94,6 @@ class UserManagement(MDScreen):
         self.data_tables.bind(on_check_press=self.on_check_press)
         self.data_tables.bind(on_row_press=self.on_row_press)
         
-
-
-    # def on_enter(self):
-    #     self.loadItems(self.load_data)    
-
 
     def on_row_press(self, instance_table, instance_row):
         
@@ -235,10 +230,3 @@ class EditUser(MDCard):
 
     def cancelar(self):      
         self.parent.remove_widget(self)
-  
-
-
-
-
-
-
