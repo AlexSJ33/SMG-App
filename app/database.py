@@ -1,7 +1,7 @@
 import sqlite3
 
 data=[]
-
+data2=[]
 class ConectaBanco:
     
    
@@ -58,7 +58,7 @@ class ConectaBanco:
     
     def listar_dados(self,usuarios=''):
         self.connect()
-
+        
         try:
             cursor = self.connection.cursor()
             cursor.execute("SELECT * FROM usuario2")
@@ -68,11 +68,27 @@ class ConectaBanco:
                 #ListaItens=(users[0],users[1],users[2],users[3],users[4])
                 ListaItens={'id':users[0], 'user':users[1],'email':users[2],'password':users[3],'admin':users[4]}
                 data.append(ListaItens)
-            
            
         except:
             pass
-            #return usuarios
+    
+    def update_list(self):
+        print('<<<<<UPDATE>>>>>')
+        self.connect()
+        
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM usuario2")
+        usuarios = cursor.fetchall()
+
+        for users in usuarios:
+            #ListaItens=(users[0],users[1],users[2],users[3],users[4])
+            ListaItens={'id':users[0], 'user':users[1],'email':users[2],'password':users[3],'admin':users[4]}
+            data2.append(ListaItens)
+        
+        return data2
+        
+        
+        
 
     def delete_user(self, id):
         self.connect()
@@ -100,3 +116,4 @@ class ConectaBanco:
             print('Erro ao tentar deletar\n',e)
         
         self.close_connection()
+    

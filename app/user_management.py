@@ -9,7 +9,7 @@ import threading
 
 
 
-from database import data
+from database import data, data2
 from database import ConectaBanco
 
 c=ConectaBanco()
@@ -30,7 +30,7 @@ class UserManagement(MDScreen):
 
     def start_second_thread(self):
     
-        threading.Thread(target=self.loadItems(data)).start()
+        threading.Thread(target=self.loadItems(c.update_list())).start()
 
 
 
@@ -51,7 +51,7 @@ class UserManagement(MDScreen):
 
     
     def loadItems(self, dados):
-        print(dados)
+        #print(dados)
         
         self.selected_index = None
         #print(ListItems)
@@ -152,12 +152,13 @@ class UserManagement(MDScreen):
 
         for data in self.data_tables.get_row_checks():
             c.delete_user(data[0])
-            #print(data)
-            #self.loadItems()
+            print(c.update_list())
             
+            #self.loadItems(c.update_list())
             
+            self.data_tables.remove_widget(self.data_tables)
             self.on_enter()
-
+        print(data2)
         Clock.schedule_once(deselect_rows)
 
 ############################################################
