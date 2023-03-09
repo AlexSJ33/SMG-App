@@ -4,7 +4,8 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
 from kivy.metrics import dp
 from kivy.clock import Clock
-import threading
+from kivy.properties import ListProperty
+
 
 
 
@@ -20,41 +21,23 @@ c.listar_dados()
 
 class UserManagement(MDScreen):
    
-    
+    mylist = ListProperty()
     row_edit = []
     check = False
     maior_q_um = False
 
+
     def on_enter(self):
-        self.start_second_thread()
-
-    def start_second_thread(self):
-    
-        threading.Thread(target=self.loadItems(c.update_list())).start()
-
-
-
-    # def load_data(self, *args):
-    #     values = []
-    #     for item in ListItems:
-    #         if item['admin'] == '1':
-    #             item['admin'] = ("check-circle", [0, 1, 0, 1],"")
-    #         elif item['admin'] == '0':
-    #             item['admin'] = ("close-circle", [1, 0, 0, 1],"")
-    #         else:
-    #             pass
-    #         values.append(item['id'], item['user'], item['email'], item['admin'])
-        
-    #     self.loadItems(values)
-
-
+        self.mylist = c.update_list()
+        self.loadItems(self.mylist)
 
     
+
+##################### CARREGAR TABELA DE USUARIOS #########################
+#  
     def loadItems(self, dados):
-        #print(dados)
-        
         self.selected_index = None
-        #print(ListItems)
+        
 
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
@@ -83,10 +66,9 @@ class UserManagement(MDScreen):
                 pass
 
             self.data_tables.add_row((item['id'], item['user'], item['email'], item['admin']))
+            
 
-        
         self.add_widget(self.data_tables)
-
         
         self.data_tables.selected_index = None
         self.selected_current_row = []
@@ -116,13 +98,6 @@ class UserManagement(MDScreen):
         instance_table.table_data.on_mouse_select(instance_row)
 
 
-        #print(row_num)
-
-        # if cell_row > 1:
-        #     self.maior_q_um = True
-        
-        
-
     def on_check_press(self, instance_table, current_row):
         if current_row[0] in self.selected_current_row:
             self.selected_current_row.remove(current_row[0])
@@ -131,6 +106,9 @@ class UserManagement(MDScreen):
             self.selected_current_row.append(current_row[0])
             print('Item selecionado', current_row)            
             self.row_edit.insert(0,current_row)
+##############################################################
+
+##################### EDITAR USUARIO #########################
 
     def edit_user(self):
         self.add_widget(EditUser(MDCard))
@@ -143,6 +121,7 @@ class UserManagement(MDScreen):
             print('check = ',self.check)
             print('Maior que Um = ',self.maior_q_um)
             print(self.row_edit[0])
+###############################################################
 
 ##################### DELETAR USUARIO #########################    
     def delete_user(self):
@@ -152,6 +131,7 @@ class UserManagement(MDScreen):
 
         for data in self.data_tables.get_row_checks():
             c.delete_user(data[0])
+            
             print(c.update_list())
             
             #self.loadItems(c.update_list())
@@ -160,14 +140,15 @@ class UserManagement(MDScreen):
             self.on_enter()
         print(data2)
         Clock.schedule_once(deselect_rows)
-
 ############################################################
-        # if rows[0] not in self.selected_current_row:
-        #     print('Selecione um item para Editar')
-        # else:
-        #     self.add_widget(EditUser(MDCard))
+
         
-        
+    def close_data(self):
+        #print('say hello')
+        #self.data_tables.remove_widget(self.data_tables)
+        self.remove_widget(self.data_tables)
+        #self.data_tables.clear_widgets()
+
     def cad_usuario(self):
         
         self.add_widget(RegisterUser())
