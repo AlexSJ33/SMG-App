@@ -4,13 +4,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
 from kivy.metrics import dp
 from kivy.clock import Clock
-from kivy.properties import ListProperty
 
-
-
-
-
-from database import data, data2
 from database import ConectaBanco
 
 c=ConectaBanco()
@@ -21,23 +15,23 @@ c.listar_dados()
 
 class UserManagement(MDScreen):
    
-    mylist = ListProperty()
+    
     row_edit = []
     check = False
     maior_q_um = False
 
 
     def on_enter(self):
-        self.mylist = c.update_list()
-        self.loadItems(self.mylist)
+        
+        self.create_datatable()
+        self.reload_datatable()
 
     
 
 ##################### CARREGAR TABELA DE USUARIOS #########################
 #  
-    def loadItems(self, dados):
+    def create_datatable(self):
         self.selected_index = None
-        
 
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.6),
@@ -57,6 +51,31 @@ class UserManagement(MDScreen):
             ],
             row_data=[],
         )
+
+        # for item in dados:
+        #     if item['admin'] == '1':
+        #         item['admin'] = ("check-circle", [0, 1, 0, 1],"")
+        #     elif item['admin'] == '0':
+        #         item['admin'] = ("close-circle", [1, 0, 0, 1],"")
+        #     else:
+        #         pass
+
+        #     self.data_tables.add_row((item['id'], item['user'], item['email'], item['admin']))
+            
+
+        self.data_tables.selected_index = None
+        self.selected_current_row = []
+
+        self.data_tables.bind(on_check_press=self.on_check_press)
+        self.data_tables.bind(on_row_press=self.on_row_press)
+
+        self.add_widget(self.data_tables)
+
+
+    def get_data(self):
+        dados = c.listar_dados()
+             
+
         for item in dados:
             if item['admin'] == '1':
                 item['admin'] = ("check-circle", [0, 1, 0, 1],"")
@@ -64,18 +83,9 @@ class UserManagement(MDScreen):
                 item['admin'] = ("close-circle", [1, 0, 0, 1],"")
             else:
                 pass
-
+        
             self.data_tables.add_row((item['id'], item['user'], item['email'], item['admin']))
-            
 
-        self.add_widget(self.data_tables)
-        
-        self.data_tables.selected_index = None
-        self.selected_current_row = []
-
-        self.data_tables.bind(on_check_press=self.on_check_press)
-        self.data_tables.bind(on_row_press=self.on_row_press)
-        
 
     def on_row_press(self, instance_table, instance_row):
         
@@ -107,6 +117,16 @@ class UserManagement(MDScreen):
             print('Item selecionado', current_row)            
             self.row_edit.insert(0,current_row)
 ##############################################################
+    def reload_datatable(self):
+        self.remove_datatable()
+        self.create_datatable()
+        self.get_data()
+
+
+    def remove_datatable(self):
+       self.remove_widget(self.data_tables)
+
+
 
 ##################### EDITAR USUARIO #########################
 
@@ -138,7 +158,7 @@ class UserManagement(MDScreen):
             
             self.data_tables.remove_widget(self.data_tables)
             self.on_enter()
-        print(data2)
+        #print(data2)
         Clock.schedule_once(deselect_rows)
 ############################################################
 

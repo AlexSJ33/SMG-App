@@ -1,7 +1,7 @@
 import sqlite3
 
-data=[]
-data2=[]
+login = []
+
 class ConectaBanco:
     
    
@@ -58,7 +58,7 @@ class ConectaBanco:
     
     def listar_dados(self,usuarios=''):
         self.connect()
-        
+        data = []
         try:
             cursor = self.connection.cursor()
             cursor.execute("SELECT * FROM usuario2")
@@ -68,13 +68,17 @@ class ConectaBanco:
                 #ListaItens=(users[0],users[1],users[2],users[3],users[4])
                 ListaItens={'id':users[0], 'user':users[1],'email':users[2],'password':users[3],'admin':users[4]}
                 data.append(ListaItens)
+                login.append(ListaItens)
            
         except:
             pass
+        return data
     
     def update_list(self):
+        data2 =[]
         print('<<<<<UPDATE>>>>>')
         self.connect()
+
         
         cursor = self.connection.cursor()
         cursor.execute("SELECT * FROM usuario2")
@@ -85,7 +89,7 @@ class ConectaBanco:
             ListaItens={'id':users[0], 'user':users[1],'email':users[2],'password':users[3],'admin':users[4]}
             data2.append(ListaItens)
         
-        return data2
+
         
         
         
@@ -106,6 +110,7 @@ class ConectaBanco:
                     self.record_data()
                     user_deleted = True
                     print('usuario deletado com sucesso!')
+                    self.update_list()
                     break
 
             if not user_deleted:

@@ -195,7 +195,8 @@ ScreenManager:
             md_bg_color: "yellow"      
             pos_hint: {'center_x': .46, 'center_y': .10}
             on_release:
-                root.close_data()
+                root.reload_datatable()
+                #root.close_data()
                 #root.edit_user()
  
         MDRaisedButton:
