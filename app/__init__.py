@@ -1,17 +1,17 @@
-from kivy.app import App
-from kivy.properties import ListProperty
-from kivy.uix.boxlayout import BoxLayout
+class ClasseA:
+    def __init__(self):
+        self.classe_b = ClasseB()
+        
+    def metodo_da_classe_a(self):
+        # chama um método da ClasseB
+        self.classe_b.metodo_da_classe_b()
 
-class MyBoxLayout(BoxLayout):
-    my_list = ListProperty()
+class ClasseB:
+    def metodo_da_classe_b(self):
+        print("Método da ClasseB foi chamado.")
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.my_list = ['item 1', 'item 2', 'item 3']
+# Cria uma instância da ClasseA
+objeto_a = ClasseA()
 
-class TestApp(App):
-    def build(self):
-        return MyBoxLayout()
-
-if __name__ == '__main__':
-    TestApp().run()
+# Chama um método da ClasseA, que por sua vez chama um método da ClasseB
+objeto_a.metodo_da_classe_a() # saída: "Método da ClasseB foi chamado."

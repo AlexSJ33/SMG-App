@@ -28,8 +28,8 @@ class UserManagement(MDScreen):
 
     
 
-##################### CARREGAR TABELA DE USUARIOS #########################
-#  
+##################### CRIA UM DATATABLE DE USUARIOS #########################
+
     def create_datatable(self):
         self.selected_index = None
 
@@ -50,18 +50,7 @@ class UserManagement(MDScreen):
                 ("Administrador", dp(46)),
             ],
             row_data=[],
-        )
-
-        # for item in dados:
-        #     if item['admin'] == '1':
-        #         item['admin'] = ("check-circle", [0, 1, 0, 1],"")
-        #     elif item['admin'] == '0':
-        #         item['admin'] = ("close-circle", [1, 0, 0, 1],"")
-        #     else:
-        #         pass
-
-        #     self.data_tables.add_row((item['id'], item['user'], item['email'], item['admin']))
-            
+        )        
 
         self.data_tables.selected_index = None
         self.selected_current_row = []
@@ -71,6 +60,8 @@ class UserManagement(MDScreen):
 
         self.add_widget(self.data_tables)
 
+
+############# FORNECE OS DADOS DE USUARIOS PARA DATATABLE ###################
 
     def get_data(self):
         dados = c.listar_dados()
@@ -85,8 +76,10 @@ class UserManagement(MDScreen):
                 pass
         
             self.data_tables.add_row((item['id'], item['user'], item['email'], item['admin']))
+###########################################################################
 
 
+################### VERIFICA LINHA SELECIONADA ###################
     def on_row_press(self, instance_table, instance_row):
         
         
@@ -117,15 +110,17 @@ class UserManagement(MDScreen):
             print('Item selecionado', current_row)            
             self.row_edit.insert(0,current_row)
 ##############################################################
+
+############### ATUALIZADA DATATABLE USUARIO #################
     def reload_datatable(self):
         self.remove_datatable()
         self.create_datatable()
         self.get_data()
 
-
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=#
     def remove_datatable(self):
        self.remove_widget(self.data_tables)
-
+##############################################################
 
 
 ##################### EDITAR USUARIO #########################
@@ -151,23 +146,11 @@ class UserManagement(MDScreen):
 
         for data in self.data_tables.get_row_checks():
             c.delete_user(data[0])
-            
-            print(c.update_list())
-            
-            #self.loadItems(c.update_list())
-            
-            self.data_tables.remove_widget(self.data_tables)
-            self.on_enter()
-        #print(data2)
+            self.reload_datatable()
+        
         Clock.schedule_once(deselect_rows)
 ############################################################
 
-        
-    def close_data(self):
-        #print('say hello')
-        #self.data_tables.remove_widget(self.data_tables)
-        self.remove_widget(self.data_tables)
-        #self.data_tables.clear_widgets()
 
     def cad_usuario(self):
         
@@ -212,7 +195,10 @@ class RegisterUser(MDCard):
             return c.inserir_dados(data)
 
     def fechar(self):
+        
         self.parent.remove_widget(self)
+        
+        
 
     def limpar_text(self):
         self.ids.usuario.text = ''
@@ -227,6 +213,8 @@ class RegisterUser(MDCard):
             self.admin = '0'
         self.adminstrador = ''
         self.adminstrador= self.admin
+
+
 
 class EditUser(MDCard):
 
