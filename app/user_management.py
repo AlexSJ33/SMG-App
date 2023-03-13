@@ -14,14 +14,17 @@ c.listar_dados()
 
 
 class UserManagement(MDScreen):
-   
+ 
     
     row_edit = []
     check = False
     maior_q_um = False
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def on_enter(self):
+        print('ok')
         
         self.create_datatable()
         self.reload_datatable()
@@ -149,14 +152,22 @@ class UserManagement(MDScreen):
             self.reload_datatable()
         
         Clock.schedule_once(deselect_rows)
-############################################################
+##############################################################
 
 
-    def cad_usuario(self):
+    def novo_usuario(self):
+        self.remove_datatable()
         
         self.add_widget(RegisterUser())
 
 class RegisterUser(MDCard):
+
+    
+    def classe_user_teste(self):
+        us = UserManagement()
+        
+        us.create_datatable()
+        #print(us)
 
     dialog = None
     adminstrador = '0'
