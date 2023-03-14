@@ -15,13 +15,17 @@ c.listar_dados()
 
 class UserManagement(MDScreen):
  
-    
     row_edit = []
     check = False
     maior_q_um = False
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    
+    def sayhello(self):
+        print("hello world")
+        self.on_enter()
+        self.create_datatable()
+        print("hello world")
+        self.reload_datatable()
+        print("hello world")
 
     def on_enter(self):
         print('ok')
@@ -34,6 +38,7 @@ class UserManagement(MDScreen):
 ##################### CRIA UM DATATABLE DE USUARIOS #########################
 
     def create_datatable(self):
+        
         self.selected_index = None
 
         self.data_tables = MDDataTable(
@@ -156,19 +161,13 @@ class UserManagement(MDScreen):
 
 
     def novo_usuario(self):
-        self.remove_datatable()
+        
         
         self.add_widget(RegisterUser())
 
-class RegisterUser(MDCard):
-
+class RegisterUser(MDScreen):
+    us = UserManagement()
     
-    def classe_user_teste(self):
-        us = UserManagement()
-        
-        us.create_datatable()
-        #print(us)
-
     dialog = None
     adminstrador = '0'
 
@@ -205,10 +204,11 @@ class RegisterUser(MDCard):
             
             return c.inserir_dados(data)
 
-    def fechar(self):
+    def cancelar(self):
         
         self.parent.remove_widget(self)
         
+        self.us.sayhello()
         
 
     def limpar_text(self):
@@ -225,9 +225,7 @@ class RegisterUser(MDCard):
         self.adminstrador = ''
         self.adminstrador= self.admin
 
-
-
-class EditUser(MDCard):
+class EditUser(MDScreen):
 
     def cancelar(self):      
         self.parent.remove_widget(self)

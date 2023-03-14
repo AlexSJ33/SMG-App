@@ -21,7 +21,8 @@ Window.size = (700, 600)
 
 screen.add_widget(ClientManagement())
 screen.add_widget(UserManagement())
-
+screen.add_widget(RegisterUser())
+screen.add_widget(EditUser())
 
 class MyApp(MDApp):
     def build(self):

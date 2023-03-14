@@ -4,6 +4,7 @@ ScreenManager:
     Menu:
     UserManagement:
     ClientManagement:
+    RegisterUser:
 
 <Inicio>:
     name: 'inicio'
@@ -297,8 +298,8 @@ ScreenManager:
             md_bg_color: "red"
             pos_hint: {'center_x': .3, 'center_y': .1}
             on_release:
-                root.classe_user_teste()
-                root.fechar()
+                #root.classe_user_teste()
+                root.cancelar()
 
         MDRaisedButton:
             text: "Salvar"
