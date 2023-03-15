@@ -20,18 +20,19 @@ class UserManagement(MDScreen):
     maior_q_um = False
     
     def sayhello(self):
-        print("hello world")
+        
+        # print("hello world")
         self.on_enter()
-        self.create_datatable()
-        print("hello world")
-        self.reload_datatable()
-        print("hello world")
+        #self.create_datatable()
+        self.remove_widget(self.data_tables)
+        # print("hello world")
+        # self.reload_datatable()
+        # print("hello world")
 
     def on_enter(self):
-        print('ok')
-        
         self.create_datatable()
         self.reload_datatable()
+        print('ok')
 
     
 
@@ -225,7 +226,8 @@ class RegisterUser(MDScreen):
         self.adminstrador = ''
         self.adminstrador= self.admin
 
-class EditUser(MDScreen):
+class EditUser(MDScreen): 
 
     def cancelar(self):      
         self.parent.remove_widget(self)
+

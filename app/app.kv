@@ -195,9 +195,10 @@ ScreenManager:
             md_bg_color: "yellow"      
             pos_hint: {'center_x': .46, 'center_y': .10}
             on_release:
-                root.reload_datatable()
+                #root.sayhello()
+                #root.reload_datatable()
                 #root.close_data()
-                #root.edit_user()
+                root.edit_user()
  
         MDRaisedButton:
             text: "Deletar Usuário"
@@ -335,6 +336,7 @@ ScreenManager:
             pos_hint: {'center_x': .7, 'center_y': .1}
             on_release:
                 root.cancelar()
+                
                 
 
         MDRaisedButton:
