@@ -120,7 +120,7 @@ class UserManagement(MDScreen):
             self.row_edit.insert(0,current_row)
 ##############################################################
 
-############### ATUALIZADA DATATABLE USUARIO #################
+############### ATUALIZA DATATABLE USUARIO #################
     def reload_datatable(self):
         self.remove_datatable()
         self.create_datatable()
@@ -209,7 +209,10 @@ class RegisterUser(MDScreen):
         
         self.parent.remove_widget(self)
         
-        self.us.sayhello()
+        #self.us.sayhello()
+        self.us.create_datatable()
+        self.us.reload_datatable()
+        
         
 
     def limpar_text(self):
