@@ -14,6 +14,10 @@ c.listar_dados()
 
 
 class UserManagement(MDScreen):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+    
  
     row_edit = []
     check = False
@@ -21,13 +25,8 @@ class UserManagement(MDScreen):
     
     def sayhello(self):
         
-        # print("hello world")
-        self.on_enter()
-        #self.create_datatable()
-        self.remove_widget(self.data_tables)
-        # print("hello world")
-        # self.reload_datatable()
-        # print("hello world")
+        print("hello world")
+
 
     def on_enter(self):
         self.create_datatable()
@@ -167,7 +166,14 @@ class UserManagement(MDScreen):
         self.add_widget(RegisterUser())
 
 class RegisterUser(MDScreen):
-    us = UserManagement()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.user = UserManagement()
+
+        
+        
+    #us = UserManagement()
     
     dialog = None
     adminstrador = '0'
@@ -205,13 +211,16 @@ class RegisterUser(MDScreen):
             
             return c.inserir_dados(data)
 
+    
+
     def cancelar(self):
         
         self.parent.remove_widget(self)
+        self.user.create_datatable()
+        self.user.get_data()
         
-        #self.us.sayhello()
-        self.us.create_datatable()
-        self.us.reload_datatable()
+        self.user.sayhello()
+        self.user.reload_datatable()
         
         
 

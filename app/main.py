@@ -25,6 +25,9 @@ screen.add_widget(RegisterUser())
 screen.add_widget(EditUser())
 
 class MyApp(MDApp):
+    # def __init__(self, **kwargs):
+    #     super().__init__(**kwargs)
+
     def build(self):
         kv = Builder.load_file('app.kv')
         screen = kv
