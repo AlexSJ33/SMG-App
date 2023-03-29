@@ -1,3 +1,4 @@
+#-------- CONTROLE DE JANELAS --------#
 ScreenManager:
     Inicio:
     Login:
@@ -5,33 +6,35 @@ ScreenManager:
     UserManagement:
     ClientManagement:
     RegisterUser:
+#-------------------------------------#
 
+
+#------- Tela de Boas vindas! --------#
 <Inicio>:
     name: 'inicio'
     MDFloatLayout:
         md_bg_color: app.theme_cls.primary_color
-
         MDLabel:
             text: "B e m - v i n d o !"
             font_size: "28sp"
             halign: 'center'
-            pos_hint: {"center_x": .5, "center_y": .70}    
-          
+            pos_hint: {"center_x": .5, "center_y": .70}
         MDIconButton:
             icon: "arrow-right-circle"
             user_font_size: "88sp"
-            pos_hint: {"center_x": .5, "center_y": .12}      
+            pos_hint: {"center_x": .5, "center_y": .12}
             on_press: app.root.current = 'login'
-                 
+#-------------------------------------#
+
+#---- Janela de Login do Sistema -----#
 <Login>:
     name:'login'
     MDFloatLayout:
-        
+
         MDIconButton:
             pos_hint: {'center_x': .5, 'center_y': .8}
             icon: 'account-circle'
             icon_size: '96sp'
-            
         MDTextField:
             id: username
             hint_text: 'Username'
@@ -39,7 +42,6 @@ ScreenManager:
             size_hint_x: .80
             multiline: False
             write_tab: False
-
         MDTextField:
             id: password
             hint_text: 'Password'
@@ -59,8 +61,7 @@ ScreenManager:
             halign: 'center'
             on_release:
                 root.login()
-                root.valida_login() 
-                
+                root.valida_login()
         MDLabel:
             id: label_login
             text: ' '
@@ -68,20 +69,19 @@ ScreenManager:
             font_size: '22px'
             halign: 'center'
             pos_hint: {'center_x': .5, 'center_y': .42}
+#-------------------------------------#
 
+#----- Menu principal do Sistema -----#
 <Menu>
     name: 'menu'
-
     MDBoxLayout:
         md_bg_color: '#B0C4DE'
         orientation:'vertical'
-                      
         MDBoxLayout:
             size_hint_y:.25
             padding:dp(25)
-
             MDBoxLayout:
-                MDLabel:                            
+                MDLabel:
                     text:"Teste"
                     halign: "center"
                     font_size: "22sp"
@@ -100,19 +100,14 @@ ScreenManager:
             on_release:
                 app.root.transition.direction = 'left'
                 app.root.current = 'gestao_cliente'
-            
         ElementCard:
             image:"imagens/fornecedor.png"
             text:"Gestão de Fornecedor"
             md_bg_color:'gray'
-            
-            
         ElementCard:
             image:"imagens/box.png"
             text:"Gestão de Produto"
             md_bg_color: 'gray'
-            
-
         ElementCard:
             image:"imagens/users.png"
             text:"Gestão de Usuário"
@@ -120,8 +115,10 @@ ScreenManager:
             md_bg_color: 'gray'
             on_release:
                 app.root.transition.direction = 'left'
-                app.root.current = 'gestao_usuario'  
+                app.root.current = 'gestao_usuario'
+#-------------------------------------#
 
+#---------- CONTROLES MDCARD ---------#
 <ElementCard@MDCard>:
     md_bg_color: 120/255, 173/255, 173/255, 1
     padding:dp(10)
@@ -133,7 +130,6 @@ ScreenManager:
     items_count:""
     subtext:''
     orientation:'vertical'
-
     Image:
         source:root.image
     MDBoxLayout:
@@ -149,7 +145,9 @@ ScreenManager:
         MDLabel:
             halign:"center"
             text:root.items_count
+#-------------------------------------#
 
+#--------- Gestão de Usuarios --------#
 <UserManagement>:
     name: 'gestao_usuario'
     id: table_screen
@@ -166,14 +164,11 @@ ScreenManager:
             elevation: 1
             md_bg_color: 'green'
             pos_hint: {'center_x': .5, 'center_y': .98}
-
             MDLabel:
                 text: 'LISTA DE USUÁRIOS'
                 color: 'white'
                 halign: 'center'
                 pos_hint: {"center_x": .5, "center_y": .5}
-
-
         MDIconButton:
             icon: "home-circle"
             user_font_size: "68sp"
@@ -181,33 +176,27 @@ ScreenManager:
             on_release:
                 app.root.current = 'menu'
                 app.root.transition.direction = 'right'
-
-
         MDRaisedButton:
             text: "Novo Usuário"
-            md_bg_color: "green"      
+            md_bg_color: "green"
             pos_hint: {'center_x': .16, 'center_y': .10}
             on_release: root.novo_usuario()
-
         MDRaisedButton:
             text: "Editar Usuário"
             text_color: 'red'
-            md_bg_color: "yellow"      
+            md_bg_color: "yellow"
             pos_hint: {'center_x': .46, 'center_y': .10}
             on_release:
-                #root.sayhello()
-                #root.reload_datatable()
-                #root.close_data()
                 root.edit_user()
- 
         MDRaisedButton:
             text: "Deletar Usuário"
-            md_bg_color: "red"      
+            md_bg_color: "red"
             pos_hint: {'center_x': .80, 'center_y': .10}
             on_release:
                 table_screen.delete_user()
+#-------------------------------------#
 
-
+#--- Tela de Cadastro de Usuarios ----#
 <RegisterUser>:
     orientation: "vertical"
     padding: "0dp"
@@ -309,26 +298,24 @@ ScreenManager:
             on_release:
                 root.get_usuario()
                 root.limpar_text()
-                
+#-------------------------------------#
 
+#------ Tela de Editar Usuarios ------#
 <EditUser>
     orientation: "vertical"
     padding: "10dp"
     size_hint: .9, .9
     pos_hint: {"center_x": .5, "center_y": .5}
-
     MDFloatLayout:
         orientation: "vertical"
         md_bg_color:'#D3D3D3'
         padding: "1dp"
-
         MDTopAppBar:
             id: toolbar
             elevation: 1
             title: "Editar Usuário"
             pos_hint: {"center_x": .5, "center_y": .94}
             md_bg_color: '#808080'
-
         MDRaisedButton:
             text: "Cancelar"
             text_color: 'black'
@@ -336,9 +323,6 @@ ScreenManager:
             pos_hint: {'center_x': .7, 'center_y': .1}
             on_release:
                 root.cancelar()
-                
-                
-
         MDRaisedButton:
             text: "Salvar"
             md_bg_color: "blue"
@@ -346,6 +330,7 @@ ScreenManager:
             # on_release:
             #     root.get_usuario()
             #     root.limpar_text()
+#-------------------------------------#
 
 <ClientManagement>:
     name: 'gestao_cliente'
@@ -366,7 +351,6 @@ ScreenManager:
             pos_hint: {"center_x": .5, "center_y": .60}
             on_press:
                 root.cad_cliente()
-    
 
         MDFillRoundFlatButton:
             text: "Editar Cliente"
@@ -380,16 +364,14 @@ ScreenManager:
             font_size: "18sp"
             halign: 'center'
             size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .40}            
-
+            pos_hint: {"center_x": .5, "center_y": .40}
 
         MDFillRoundFlatButton:
             text: "Exibir Cliente"
             font_size: "18sp"
             halign: 'center'
             size_hint_x: .80
-            pos_hint: {"center_x": .5, "center_y": .30}            
-
+            pos_hint: {"center_x": .5, "center_y": .30}
 
         MDFillRoundFlatButton:
             text: "Listar Clientes"
@@ -398,23 +380,20 @@ ScreenManager:
             size_hint_x: .80
             pos_hint: {"center_x": .5, "center_y": .20}
 
-          
         MDIconButton:
             icon: "arrow-left-circle"
             icon_size: "32sp"
-            
             pos_hint: {"center_x": .5, "center_y": .10}
             on_release:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
-    
+
 <RegisterClient>:
     id: cadastro
     orientation: "vertical"
     padding: "0dp"
     size_hint: .9, .9
     pos_hint: {"center_x": .5, "center_y": .5}
-    
     MDFloatLayout:
         orientation: "vertical"
         md_bg_color:'azure'
@@ -528,7 +507,6 @@ ScreenManager:
             write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
-
 
         MDRaisedButton:
             text: "Cancelar"

@@ -38,7 +38,9 @@ class UserManagement(MDScreen):
 ##################### CRIA UM DATATABLE DE USUARIOS #########################
 
     def create_datatable(self):
+
         
+
         self.selected_index = None
 
         self.data_tables = MDDataTable(
@@ -171,10 +173,6 @@ class RegisterUser(MDScreen):
         super().__init__(**kwargs)
         self.user = UserManagement()
 
-        
-        
-    #us = UserManagement()
-    
     dialog = None
     adminstrador = '0'
 
@@ -216,11 +214,9 @@ class RegisterUser(MDScreen):
     def cancelar(self):
         
         self.parent.remove_widget(self)
-        self.user.create_datatable()
-        self.user.get_data()
-        
+        self.user.reload_datatable
         self.user.sayhello()
-        self.user.reload_datatable()
+        
         
         
 
