@@ -1,4 +1,5 @@
-from kivymd.uix.screen import MDScreen
+
+from kivy.uix.screenmanager import Screen
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.card import MDCard
@@ -13,7 +14,8 @@ c.create_table()
 c.listar_dados()
 
 
-class UserManagement(MDScreen):
+class UserManagement(Screen):
+    
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -132,7 +134,6 @@ class UserManagement(MDScreen):
        self.remove_widget(self.data_tables)
 ##############################################################
 
-
 ##################### EDITAR USUARIO #########################
 
     def edit_user(self):
@@ -161,18 +162,7 @@ class UserManagement(MDScreen):
         Clock.schedule_once(deselect_rows)
 ##############################################################
 
-
-    def novo_usuario(self):
-        
-        
-        self.add_widget(RegisterUser())
-
-class RegisterUser(MDScreen):
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.user = UserManagement()
-
+class RegisterUser(Screen):
     dialog = None
     adminstrador = '0'
 
@@ -212,20 +202,15 @@ class RegisterUser(MDScreen):
     
 
     def cancelar(self):
-        
-        self.parent.remove_widget(self)
-        self.user.reload_datatable
-        self.user.sayhello()
-        
-        
-        
+        self.limpar_text()
+                
 
     def limpar_text(self):
         self.ids.usuario.text = ''
         self.ids.email.text = ''
         self.ids.senha.text = ''
         self.ids.re_senha.text = ''
-
+        
     def on_checkbox_active(self,checkbox, value):
         if value:
             self.admin = '1'
@@ -234,8 +219,9 @@ class RegisterUser(MDScreen):
         self.adminstrador = ''
         self.adminstrador= self.admin
 
-class EditUser(MDScreen): 
+class EditUser(Screen):
+    pass
 
-    def cancelar(self):      
-        self.parent.remove_widget(self)
+    # def cancelar(self):      
+    #     self.parent.remove_widget(self)
 

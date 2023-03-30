@@ -6,6 +6,7 @@ ScreenManager:
     UserManagement:
     ClientManagement:
     RegisterUser:
+    EditUser:
 #-------------------------------------#
 
 
@@ -180,14 +181,19 @@ ScreenManager:
             text: "Novo Usuário"
             md_bg_color: "green"
             pos_hint: {'center_x': .16, 'center_y': .10}
-            on_release: root.novo_usuario()
+            on_release:
+                app.root.transition.direction = 'left'
+                app.root.current = 'registrar_usuario'
+                #root.novo_usuario()
         MDRaisedButton:
             text: "Editar Usuário"
             text_color: 'red'
             md_bg_color: "yellow"
             pos_hint: {'center_x': .46, 'center_y': .10}
             on_release:
-                root.edit_user()
+                app.root.transition.direction = 'left'
+                app.root.current = 'editar_usuario'
+                #root.edit_user()
         MDRaisedButton:
             text: "Deletar Usuário"
             md_bg_color: "red"
@@ -198,6 +204,7 @@ ScreenManager:
 
 #--- Tela de Cadastro de Usuarios ----#
 <RegisterUser>:
+    name: 'registrar_usuario'
     orientation: "vertical"
     padding: "0dp"
     size_hint: .9, .9
@@ -232,6 +239,8 @@ ScreenManager:
             size_hint_x: .80
             multiline: False
             write_tab: False
+            line_color_normal: "gray"
+            hint_text_color_normal: "gray"            
 
         MDTextField:
             id: email
@@ -274,12 +283,12 @@ ScreenManager:
             pos_hint: {'center_x': .2, 'center_y': .2}
             on_active: root.on_checkbox_active(*args)
 
-
         MDLabel:
             text: 'Administrador'
-            color: 'gray'
+            theme_text_color: "Custom"
+            text_color: 'red'
             halign: 'right'
-            pos_hint: {"center_x": .1, "center_y": .2}
+            pos_hint: {"center_x": .0, "center_y": .2}
 
 
 
@@ -288,8 +297,9 @@ ScreenManager:
             md_bg_color: "red"
             pos_hint: {'center_x': .3, 'center_y': .1}
             on_release:
-                #root.classe_user_teste()
                 root.cancelar()
+                app.root.transition.direction = 'right'
+                app.root.current = 'gestao_usuario'
 
         MDRaisedButton:
             text: "Salvar"
@@ -302,6 +312,7 @@ ScreenManager:
 
 #------ Tela de Editar Usuarios ------#
 <EditUser>
+    name: 'editar_usuario'
     orientation: "vertical"
     padding: "10dp"
     size_hint: .9, .9
@@ -322,7 +333,9 @@ ScreenManager:
             md_bg_color: "white"
             pos_hint: {'center_x': .7, 'center_y': .1}
             on_release:
-                root.cancelar()
+                app.root.transition.direction = 'right'
+                app.root.current = 'gestao_usuario'
+                #root.cancelar()
         MDRaisedButton:
             text: "Salvar"
             md_bg_color: "blue"
@@ -332,6 +345,7 @@ ScreenManager:
             #     root.limpar_text()
 #-------------------------------------#
 
+#--------- Gestão de Clientes --------#
 <ClientManagement>:
     name: 'gestao_cliente'
     MDFloatLayout:
@@ -387,7 +401,9 @@ ScreenManager:
             on_release:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'menu'
+#-------------------------------------#
 
+#--- Tela de Cadastro de Clientes ----#
 <RegisterClient>:
     id: cadastro
     orientation: "vertical"
@@ -521,3 +537,4 @@ ScreenManager:
             pos_hint: {'center_x': .7, 'center_y': .1}
             on_release:
                 root.get_cliente()
+#-------------------------------------#
