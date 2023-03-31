@@ -1,8 +1,7 @@
 
-from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import Screen,ScreenManager
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.card import MDCard
 from kivy.metrics import dp
 from kivy.clock import Clock
 
@@ -12,6 +11,10 @@ c=ConectaBanco()
 c.connect()
 c.create_table()
 c.listar_dados()
+
+
+screen = ScreenManager()
+
 
 
 class UserManagement(Screen):
@@ -25,31 +28,23 @@ class UserManagement(Screen):
     check = False
     maior_q_um = False
     
-    def sayhello(self):
-        
-        print("hello world")
-
-
     def on_enter(self):
         self.create_datatable()
         self.reload_datatable()
-        print('ok')
 
-    
-
-##################### CRIA UM DATATABLE DE USUARIOS #########################
+##################### CRIA O DATATABLE DE USUARIOS #########################
 
     def create_datatable(self):
-
-        
 
         self.selected_index = None
 
         self.data_tables = MDDataTable(
+
             size_hint=(0.9, 0.6),
             pos_hint={'center_x':.5, 'center_y':.5},
             use_pagination=True,
             check=True,
+            elevation=2,
             #rows_num=10,
             background_color_header="#808080",
             #background_color_cell="#451938",
@@ -77,8 +72,6 @@ class UserManagement(Screen):
 
     def get_data(self):
         dados = c.listar_dados()
-             
-
         for item in dados:
             if item['admin'] == '1':
                 item['admin'] = ("check-circle", [0, 1, 0, 1],"")
@@ -137,7 +130,7 @@ class UserManagement(Screen):
 ##################### EDITAR USUARIO #########################
 
     def edit_user(self):
-        self.add_widget(EditUser(MDCard))
+        self.add_widget(EditUser(Screen))
         
 
         if self.check == False:
@@ -161,6 +154,7 @@ class UserManagement(Screen):
         
         Clock.schedule_once(deselect_rows)
 ##############################################################
+
 
 class RegisterUser(Screen):
     dialog = None
@@ -198,12 +192,6 @@ class RegisterUser(Screen):
             
             
             return c.inserir_dados(data)
-
-    
-
-    def cancelar(self):
-        self.limpar_text()
-                
 
     def limpar_text(self):
         self.ids.usuario.text = ''

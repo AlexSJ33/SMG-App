@@ -4,8 +4,6 @@ login = []
 
 class ConectaBanco:
     
-   
-    
     # --- Criando a conexão com banco de dados "kivy_data.db"
     def __init__(self, name = 'kivy_data.db') -> None:
         self.name = name
@@ -25,6 +23,45 @@ class ConectaBanco:
             password TEXT NOT NULL,
             administrador VARCHAR(1) NOT NULL)
             """)
+        self.verificar_dados()
+
+    def verificar_dados(self):
+        self.connect()
+
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("""SELECT COUNT(*) AS usuario FROM usuario2""")
+            dados = cursor.fetchall()
+
+            if dados[0][0] < 1:
+                self.criar_admin()
+
+                print('usuario admin criado')
+            else:
+                print('Total users:', dados[0][0])
+
+
+        except Exception as e:
+            print('não existe dados', e)
+        self.close_connection()
+
+    def criar_admin(self):
+        dados = ['admin','admin@admin.com','123','1']
+        campos = ('usuario','email','password','administrador')
+        itens = ('?,?,?,?')
+
+        self.connect()
+        
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute(f"""INSERT INTO usuario2 {campos} VALUES ({itens}) """,dados)
+            self.record_data()
+            
+        except Exception as e:
+            print('Erro, dados nao gravados\n',e)
+        
+        self.close_connection()
+
 
     def inserir_dados(self,dados):
         campos = ('usuario','email','password','administrador')
@@ -90,10 +127,6 @@ class ConectaBanco:
             data2.append(ListaItens)
         
 
-        
-        
-        
-
     def delete_user(self, id):
         self.connect()
 
@@ -121,4 +154,3 @@ class ConectaBanco:
             print('Erro ao tentar deletar\n',e)
         
         self.close_connection()
-    

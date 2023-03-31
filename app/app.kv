@@ -182,6 +182,7 @@ ScreenManager:
             md_bg_color: "green"
             pos_hint: {'center_x': .16, 'center_y': .10}
             on_release:
+                
                 app.root.transition.direction = 'left'
                 app.root.current = 'registrar_usuario'
                 #root.novo_usuario()
@@ -205,10 +206,6 @@ ScreenManager:
 #--- Tela de Cadastro de Usuarios ----#
 <RegisterUser>:
     name: 'registrar_usuario'
-    orientation: "vertical"
-    padding: "0dp"
-    size_hint: .9, .9
-    pos_hint: {"center_x": .5, "center_y": .5}
 
     MDFloatLayout:
         orientation: "vertical"
@@ -235,6 +232,7 @@ ScreenManager:
         MDTextField:
             id: usuario
             hint_text: 'Usuário'
+            
             pos_hint: {'center_x': .5, 'center_y': .6}
             size_hint_x: .80
             multiline: False
@@ -245,6 +243,7 @@ ScreenManager:
         MDTextField:
             id: email
             hint_text: 'E-mail'
+            
             icon_right: 'email'
             pos_hint: {'center_x': .5, 'center_y': .5}
             size_hint_x: .80
@@ -297,7 +296,7 @@ ScreenManager:
             md_bg_color: "red"
             pos_hint: {'center_x': .3, 'center_y': .1}
             on_release:
-                root.cancelar()
+                root.limpar_text()
                 app.root.transition.direction = 'right'
                 app.root.current = 'gestao_usuario'
 
@@ -313,10 +312,7 @@ ScreenManager:
 #------ Tela de Editar Usuarios ------#
 <EditUser>
     name: 'editar_usuario'
-    orientation: "vertical"
-    padding: "10dp"
-    size_hint: .9, .9
-    pos_hint: {"center_x": .5, "center_y": .5}
+
     MDFloatLayout:
         orientation: "vertical"
         md_bg_color:'#D3D3D3'
@@ -335,7 +331,7 @@ ScreenManager:
             on_release:
                 app.root.transition.direction = 'right'
                 app.root.current = 'gestao_usuario'
-                #root.cancelar()
+                
         MDRaisedButton:
             text: "Salvar"
             md_bg_color: "blue"
