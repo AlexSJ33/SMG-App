@@ -209,41 +209,29 @@ ScreenManager:
 
     MDFloatLayout:
         orientation: "vertical"
-        md_bg_color:'azure'
+        md_bg_color:'#DCDCDC'
         padding: "1dp"
 
-        MDTopAppBar:
-            id: toolbar
-            elevation: 1
-            pos_hint: {"center_x": .5, "center_y": .94}
-            md_bg_color: 'green'
-
-        MDLabel:
-            text: 'NOVO USUÁRIO'
-            color: 'white'
-            halign: 'center'
-            pos_hint: {"center_x": .5, "center_y": .94}
-
-        MDIconButton:
+        FitImage:
+            source:"imagens/user_teste.png"
+            size_hint: .2, .3
             pos_hint: {'center_x': .5, 'center_y': .8}
-            icon: 'account-edit'
-            icon_size: '76sp'
 
         MDTextField:
             id: usuario
             hint_text: 'Usuário'
-            
+            text_color_normal: 'gray'
             pos_hint: {'center_x': .5, 'center_y': .6}
             size_hint_x: .80
             multiline: False
             write_tab: False
             line_color_normal: "gray"
-            hint_text_color_normal: "gray"            
+            hint_text_color_normal: "gray"
 
         MDTextField:
             id: email
             hint_text: 'E-mail'
-            
+            text_color_normal: 'gray'
             icon_right: 'email'
             pos_hint: {'center_x': .5, 'center_y': .5}
             size_hint_x: .80
@@ -255,7 +243,7 @@ ScreenManager:
         MDTextField:
             id: senha
             hint_text: 'Senha'
-            icon_right: 'eye-off'
+            text_color_normal: 'gray'
             password: True
             pos_hint: {'center_x': .5, 'center_y': .4}
             size_hint_x: .80
@@ -264,10 +252,15 @@ ScreenManager:
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
 
+        MDIconButton:
+            icon: "eye-off"
+            pos_hint: {'center_x': .87, 'center_y': .41}
+
+
         MDTextField:
             id: re_senha
             hint_text: 'Repetir Senha'
-            icon_right: 'eye-off'
+            text_color_normal: 'gray'
             password: True
             pos_hint: {'center_x': .5, 'center_y': .3}
             size_hint_x: .80
@@ -275,6 +268,10 @@ ScreenManager:
             write_tab: False
             line_color_normal: "gray"
             hint_text_color_normal: "gray"
+        
+        MDIconButton:
+            icon: "eye-off"
+            pos_hint: {'center_x': .87, 'center_y': .31}            
 
         MDCheckbox:
             size_hint: None, None
