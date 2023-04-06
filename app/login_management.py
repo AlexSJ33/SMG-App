@@ -40,7 +40,7 @@ class Login(Screen):
                 self.ids.label_login.text = ' '
 
             elif self.username == users['user'] and self.password == users['password']:
-                print(self.username)
+                #print(self.username)
                 self.ids.label_login.text = 'Login Accept !!'
                 self.ids.label_login.text_color= 'green'
                 MDApp.get_running_app().root.current = 'menu'

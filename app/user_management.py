@@ -12,17 +12,12 @@ c.connect()
 c.create_table()
 c.listar_dados()
 
-
 screen = ScreenManager()
 
-
-
 class UserManagement(Screen):
-    
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-    
  
     row_edit = []
     check = False
@@ -112,11 +107,11 @@ class UserManagement(Screen):
 
         else:
             self.selected_current_row.append(current_row[0])
-            print('Item selecionado', current_row)            
+            #print('Item selecionado', current_row)            
             self.row_edit.insert(0,current_row)
 ##############################################################
 
-############### ATUALIZA DATATABLE USUARIO #################
+################ ATUALIZA DATATABLE USUARIO ##################
     def reload_datatable(self):
         self.remove_datatable()
         self.create_datatable()
@@ -172,24 +167,35 @@ class RegisterUser(Screen):
         admin = self.adminstrador
 
         data = (usuario,email,senha,admin)
-        print('get_usuario =',admin)
+        #print('get_usuario =',admin)
+
         
         if usuario == '' or email.strip() == '' or senha.strip() == '' or re_senha.strip() == '':
             self.dialog = MDDialog(
                 text="[color=#f9f9f9]Preencha todos os campos ![/color]",
                 md_bg_color='3c3c3c',
+                radius=[20, 7, 20, 7],
                     
                 )
             self.dialog.open()
-            
+        
+        elif re_senha != senha:
+
+            self.dialog = MDDialog(
+                            text="[color=#f9f9f9]As Senhas não correspondem !![/color]",
+                            md_bg_color='3c3c3c',
+                            radius=[20, 7, 20, 7],
+                                
+                            )
+            self.dialog.open()
+
         else:
             self.dialog = MDDialog(
                 text="[color=#f9f9f9]Dados gravados com sucesso![/color]",
                 md_bg_color='3c3c3c',
                 )
     
-            self.dialog.open()
-            
+            self.dialog.open()        
             
             return c.inserir_dados(data)
 
@@ -209,7 +215,3 @@ class RegisterUser(Screen):
 
 class EditUser(Screen):
     pass
-
-    # def cancelar(self):      
-    #     self.parent.remove_widget(self)
-

@@ -35,11 +35,8 @@ class ConectaBanco:
 
             if dados[0][0] < 1:
                 self.criar_admin()
-
-                print('usuario admin criado')
             else:
-                print('Total users:', dados[0][0])
-
+                pass
 
         except Exception as e:
             print('não existe dados', e)
@@ -102,7 +99,6 @@ class ConectaBanco:
             usuarios = cursor.fetchall()
 
             for users in usuarios:
-                #ListaItens=(users[0],users[1],users[2],users[3],users[4])
                 ListaItens={'id':users[0], 'user':users[1],'email':users[2],'password':users[3],'admin':users[4]}
                 data.append(ListaItens)
                 login.append(ListaItens)
@@ -113,7 +109,6 @@ class ConectaBanco:
     
     def update_list(self):
         data2 =[]
-        print('<<<<<UPDATE>>>>>')
         self.connect()
 
         
@@ -122,10 +117,8 @@ class ConectaBanco:
         usuarios = cursor.fetchall()
 
         for users in usuarios:
-            #ListaItens=(users[0],users[1],users[2],users[3],users[4])
             ListaItens={'id':users[0], 'user':users[1],'email':users[2],'password':users[3],'admin':users[4]}
             data2.append(ListaItens)
-        
 
     def delete_user(self, id):
         self.connect()
@@ -142,13 +135,11 @@ class ConectaBanco:
                     cursor.execute("DELETE FROM usuario2 where id=?",(id,))
                     self.record_data()
                     user_deleted = True
-                    print('usuario deletado com sucesso!')
                     self.update_list()
                     break
 
             if not user_deleted:
-                print('Usuário não encontrado com ID', id)
-                
+                pass                
             
         except Exception as e:
             print('Erro ao tentar deletar\n',e)
